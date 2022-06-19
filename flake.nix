@@ -50,7 +50,7 @@
       {
         inherit self inputs;
 
-        channelsConfig = { allowUnfree = lib.mkForce false; };
+        channelsConfig = { allowUnfree = self.nixos.lib.mkForce false; };
 
         channels = {
           nixos = {
@@ -90,7 +90,7 @@
             ];
           };
 
-          imports = [ (digga.lib.importHosts ./hosts/nixos) ];
+          imports = [ (digga.lib.importHosts ./hosts) ];
           hosts = {
             /* set host-specific properties here */
             NixOS = { };
