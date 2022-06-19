@@ -7,6 +7,7 @@
       ./hardware-configuration.nix
       profiles.sway
       profiles.tuigreet
+      profiles.users.sarios
     ];
 
   boot = { loader.grub = {
@@ -65,19 +66,6 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.mutableUsers = false;
   users.users.root.hashedPassword = "$6$lrguFJ3Bvt21pXxl$XOPIdssQnMAIuKX6s2LTqZAdSWZwInexCE1yQvNeCRtS/r5pL0j8OLSYaT8Aimaw4/VZ6ROIXlqYI62zVzqEF1";
-  users.users.sarios = {
-    isNormalUser = true;
-    hashedPassword = "$6$FSsxxOy7h3MFBXy4$wJ8fHywHWLDX30M7MFReqUUKOkDVuDWfAUbzMG6hf/z4siwpLavvzWFTly3Dp0duvlbEAJSXd2vPF.Ni7HRyp.";
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-    packages = with pkgs; [
-      firefox 
-      tmux kitty alacritty
-      neovim vim
-      bottom
-      tdesktop
-      exa bat delta
-    ];
-  };
  
   # List packages installed in system profile. To search, run:
   # $ nix search wget
