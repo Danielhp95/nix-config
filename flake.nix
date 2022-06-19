@@ -8,15 +8,8 @@
   inputs =
     {
       # Track channels with commits tested and built by hydra
-      nixos.url = "github:nixos/nixpkgs/nixos-21.11";
+      nixos.url = "github:nixos/nixpkgs/nixos-22.05";
       latest.url = "github:nixos/nixpkgs/nixos-unstable";
-      # For darwin hosts: it can be helpful to track this darwin-specific stable
-      # channel equivalent to the `nixos-*` channels for NixOS. For one, these
-      # channels are more likely to provide cached binaries for darwin systems.
-      # But, perhaps even more usefully, it provides a place for adding
-      # darwin-specific overlays and packages which could otherwise cause build
-      # failures on Linux systems.
-      nixpkgs-darwin-stable.url = "github:NixOS/nixpkgs/nixpkgs-21.11-darwin";
 
       digga.url = "github:divnix/digga";
       digga.inputs.nixpkgs.follows = "nixos";
@@ -24,15 +17,8 @@
       digga.inputs.home-manager.follows = "home";
       digga.inputs.deploy.follows = "deploy";
 
-      bud.url = "github:divnix/bud";
-      bud.inputs.nixpkgs.follows = "nixos";
-      bud.inputs.devshell.follows = "digga/devshell";
-
       home.url = "github:nix-community/home-manager/release-21.11";
       home.inputs.nixpkgs.follows = "nixos";
-
-      darwin.url = "github:LnL7/nix-darwin";
-      darwin.inputs.nixpkgs.follows = "nixpkgs-darwin-stable";
 
       deploy.url = "github:serokell/deploy-rs";
       deploy.inputs.nixpkgs.follows = "nixos";
@@ -43,18 +29,13 @@
       nvfetcher.url = "github:berberman/nvfetcher";
       nvfetcher.inputs.nixpkgs.follows = "nixos";
 
-      naersk.url = "github:nmattia/naersk";
-      naersk.inputs.nixpkgs.follows = "nixos";
-
       nixos-hardware.url = "github:nixos/nixos-hardware";
-
       nixos-generators.url = "github:nix-community/nixos-generators";
     };
 
   outputs =
     { self
     , digga
-    , bud
     , nixos
     , home
     , nixos-hardware
@@ -69,14 +50,10 @@
       {
         inherit self inputs;
 
-        channelsConfig = { allowUnfree = true; };
+        channelsConfig = { allowUnfree = lib.mkForce false; };
 
         channels = {
           nixos = {
-            imports = [ (digga.lib.importOverlays ./overlays) ];
-            overlays = [ ];
-          };
-          nixpkgs-darwin-stable = {
             imports = [ (digga.lib.importOverlays ./overlays) ];
             overlays = [ ];
           };
@@ -107,11 +84,9 @@
             imports = [ (digga.lib.importExportableModules ./modules) ];
             modules = [
               { lib.our = self.lib; }
-              digga.nixosModules.bootstrapIso
               digga.nixosModules.nixConfig
               home.nixosModules.home-manager
               agenix.nixosModules.age
-              bud.nixosModules.bud
             ];
           };
 
@@ -130,34 +105,6 @@
           };
         };
 
-        darwin = {
-          hostDefaults = {
-            system = "x86_64-darwin";
-            channelName = "nixpkgs-darwin-stable";
-            imports = [ (digga.lib.importExportableModules ./modules) ];
-            modules = [
-              { lib.our = self.lib; }
-              digga.darwinModules.nixConfig
-              home.darwinModules.home-manager
-              agenix.nixosModules.age
-            ];
-          };
-
-          imports = [ (digga.lib.importHosts ./hosts/darwin) ];
-          hosts = {
-            /* set host-specific properties here */
-            Mac = { };
-          };
-          importables = rec {
-            profiles = digga.lib.rakeLeaves ./profiles // {
-              users = digga.lib.rakeLeaves ./users;
-            };
-            suites = with profiles; rec {
-              base = [ core.darwin users.darwin ];
-            };
-          };
-        };
-
         home = {
           imports = [ (digga.lib.importExportableModules ./users/modules) ];
           modules = [ ];
@@ -168,23 +115,7 @@
             };
           };
           users = {
-            # TODO: does this naming convention still make sense with darwin support?
-            #
-            # - it doesn't make sense to make a 'nixos' user available on
-            #   darwin, and vice versa
-            #
-            # - the 'nixos' user might have special significance as the default
-            #   user for fresh systems
-            #
-            # - perhaps a system-agnostic home-manager user is more appropriate?
-            #   something like 'primaryuser'?
-            #
-            # all that said, these only exist within the `hmUsers` attrset, so
-            # it could just be left to the developer to determine what's
-            # appropriate. after all, configuring these hm users is one of the
-            # first steps in customizing the template.
             nixos = { suites, ... }: { imports = suites.base; };
-            darwin = { suites, ... }: { imports = suites.base; };
           }; # digga.lib.importers.rakeLeaves ./users/hm;
         };
 
@@ -193,7 +124,6 @@
         # TODO: similar to the above note: does it make sense to make all of
         # these users available on all systems?
         homeConfigurations = digga.lib.mergeAny
-          (digga.lib.mkHomeConfigurations self.darwinConfigurations)
           (digga.lib.mkHomeConfigurations self.nixosConfigurations)
         ;
 
