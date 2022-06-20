@@ -15,6 +15,7 @@
       usbutils
       utillinux
 
+      vim
       binutils
       coreutils
       curl

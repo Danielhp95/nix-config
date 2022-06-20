@@ -7,6 +7,7 @@
       direnv
       shell.zsh
       shell.starship
+      shell.vim.neovim
       desktop.sway
       desktop.swaylock
       desktop.sound
@@ -26,8 +27,6 @@
       tmux
       kitty
       alacritty
-      neovim
-      vim
       bottom
       tdesktop
       exa
