@@ -12,12 +12,14 @@
       latest.url = "github:nixos/nixpkgs/nixos-unstable";
 
       digga.url = "github:divnix/digga";
+      digga.inputs.latest.follows = "latest";
       digga.inputs.nixpkgs.follows = "nixos";
+      digga.inputs.nixpkgs-unstable.follows = "latest";
       digga.inputs.nixlib.follows = "nixos";
       digga.inputs.home-manager.follows = "home";
       digga.inputs.deploy.follows = "deploy";
 
-      home.url = "github:nix-community/home-manager/release-21.11";
+      home.url = "github:nix-community/home-manager/release-22.05";
       home.inputs.nixpkgs.follows = "nixos";
 
       deploy.url = "github:serokell/deploy-rs";

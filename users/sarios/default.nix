@@ -6,6 +6,11 @@
       git
       direnv
       shell.zsh
+      shell.starship
+      sway.sway
+      sway.swaylock
+      waybar
+      mako
     ];
 
   };
@@ -16,12 +21,17 @@
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
     shell = pkgs.zsh;
     packages = with pkgs; [
-      firefox 
-      tmux kitty alacritty
-      neovim vim
+      firefox
+      tmux
+      kitty
+      alacritty
+      neovim
+      vim
       bottom
       tdesktop
-      exa bat delta
+      exa
+      bat
+      delta
     ];
   };
 }
