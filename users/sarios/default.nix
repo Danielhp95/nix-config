@@ -7,8 +7,9 @@
       direnv
       shell.zsh
       shell.starship
-      sway.sway
-      sway.swaylock
+      desktop.sway
+      desktop.swaylock
+      desktop.sound
       waybar
       mako
     ];

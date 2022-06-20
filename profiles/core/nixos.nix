@@ -1,15 +1,12 @@
+# We combined two files here. TODO: clean up
+
 { config, lib, pkgs, self, ... }:
 
 {
-  imports = [
-    ./common.nix
-  ];
-
-  # This is just a representation of the nix default
-  nix.systemFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+  # Sets nrdxp.cachix.org binary cache which just speeds up some builds
+  imports = [ ../cachix ];
 
   environment = {
-
     # Selection of sysadmin tools that can come in handy
     systemPackages = with pkgs; [
       dosfstools
@@ -17,59 +14,59 @@
       iputils
       usbutils
       utillinux
+
+      binutils
+      coreutils
+      curl
+      direnv
+      fd
+      git
+      jq # Json query + colors
+      manix # Man searcher for nix stuff
+      moreutils
+      nix-index # Used by manix
+      nmap
+      ripgrep
+      tealdeer # Summary of man pages
     ];
-
-    shellAliases =
-      let ifSudo = lib.mkIf config.security.sudo.enable; in
-      {
-        # nix
-        nrb = ifSudo "sudo nixos-rebuild";
-
-        # fix nixos-option for flake compat
-        nixos-option = "nixos-option -I nixpkgs=${self}/lib/compat";
-
-        # systemd
-        ctl = "systemctl";
-        stl = ifSudo "s systemctl";
-        utl = "systemctl --user";
-        ut = "systemctl --user start";
-        un = "systemctl --user stop";
-        up = ifSudo "s systemctl start";
-        dn = ifSudo "s systemctl stop";
-        jtl = "journalctl";
-      };
   };
 
+  fonts.fonts = with pkgs; [
+    powerline-fonts
+    (nerdfonts.override { fonts = [ "FiraCode" ]; })
+  ];
   fonts.fontconfig.defaultFonts = {
-    monospace = [ "DejaVu Sans Mono for Powerline" ];
-    sansSerif = [ "DejaVu Sans" ];
+    monospace = [ "Fira Code Mono" ];
+    sansSerif = [ "Fira Code" ];
   };
 
   nix = {
+    systemFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+
     # Improve nix store disk usage
     autoOptimiseStore = true;
     optimise.automatic = true;
     allowedUsers = [ "@wheel" ];
-  };
+    settings.sandbox = true;
 
-  programs.bash = {
-    # Enable starship
-    promptInit = ''
-      eval "$(${pkgs.starship}/bin/starship init bash)"
-    '';
-    # Enable direnv, a tool for managing shell environments
-    interactiveShellInit = ''
-      eval "$(${pkgs.direnv}/bin/direnv hook bash)"
+    # Improve nix store disk usage
+    gc.automatic = true;
+
+    # Prevents impurities in builds
+    useSandbox = true;
+
+    # Give root user and wheel group special Nix privileges.
+    trustedUsers = [ "root" "@wheel" ];
+
+    # Generally useful nix option defaults
+    extraOptions = ''
+      min-free = 536870912
+      keep-outputs = true
+      keep-derivations = true
+      fallback = true
     '';
   };
 
   # For rage encryption, all hosts need a ssh key pair
-  services.openssh = {
-    enable = true;
-    openFirewall = lib.mkDefault false;
-  };
-
-  # Service that makes Out of Memory Killer more effective
-  services.earlyoom.enable = true;
-
+  services.openssh.enable = true;
 }

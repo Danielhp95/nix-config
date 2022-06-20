@@ -59,7 +59,8 @@ in
         style = "Bold Semi-Condensed";
         size = 13.0;
       };
-      menu = ''"rofi -show-icons -modi ssh,drun,filebrowser,emoji -show drun"'';
+      #menu = ''"rofi -show-icons -modi ssh,drun,filebrowser,emoji -show drun"'';
+      menu = ''"rofi -show-icons -modi drun -show drun"'';
       gaps = {
         inner = 14;
         outer = -2;

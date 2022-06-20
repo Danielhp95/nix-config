@@ -3,14 +3,18 @@
 {
   # Magically handles all function passing at the top of nix files
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      profiles.sway
-      profiles.tuigreet
+      profiles.desktop.graphical
+      profiles.desktop.tuigreet
+      profiles.desktop.sway
       profiles.users.sarios
+      profiles.core.nixos # TODO: Improve naming
     ];
 
-  boot = { loader.grub = {
+  boot = {
+    loader.grub = {
       #device = "/dev/nvme0n1";
       device = "nodev";
       enable = true;
@@ -24,7 +28,7 @@
   networking.hostName = "sarios-blade"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.wireless.iwd.enable = true;  # Enables iwctl REPL for connecting to the internet
+  networking.wireless.iwd.enable = true; # Enables iwctl REPL for connecting to the internet
   # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
   # Set your time zone.
@@ -44,7 +48,7 @@
 
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
-  
+
 
   # Configure keymap in X11
   # services.xserver.layout = "us";
@@ -66,12 +70,12 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.mutableUsers = false;
   users.users.root.hashedPassword = "$6$lrguFJ3Bvt21pXxl$XOPIdssQnMAIuKX6s2LTqZAdSWZwInexCE1yQvNeCRtS/r5pL0j8OLSYaT8Aimaw4/VZ6ROIXlqYI62zVzqEF1";
- 
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     wget
-    xorg.xf86inputlibinput  # for razer trackpad
+    xorg.xf86inputlibinput # for razer trackpad
     git
   ];
 
