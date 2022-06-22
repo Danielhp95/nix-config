@@ -11,18 +11,11 @@
       desktop.sway
       desktop.swaylock
       desktop.sound
+      obsidian
       waybar
       mako
     ];
-
-  };
-  environment.pathsToLink = [ "/share/zsh" ];
-  users.users.sarios = {
-    isNormalUser = true;
-    hashedPassword = "$6$FSsxxOy7h3MFBXy4$wJ8fHywHWLDX30M7MFReqUUKOkDVuDWfAUbzMG6hf/z4siwpLavvzWFTly3Dp0duvlbEAJSXd2vPF.Ni7HRyp.";
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-    shell = pkgs.zsh;
-    packages = with pkgs; [
+    home.packages = with pkgs; [
       firefox
       tmux
       kitty
@@ -32,6 +25,18 @@
       exa
       bat
       delta
+      element-desktop
     ];
+
+  };
+  environment.pathsToLink = [ "/share/zsh" ];
+  users.users.sarios = {
+    isNormalUser = true;
+    hashedPassword = "$6$FSsxxOy7h3MFBXy4$wJ8fHywHWLDX30M7MFReqUUKOkDVuDWfAUbzMG6hf/z4siwpLavvzWFTly3Dp0duvlbEAJSXd2vPF.Ni7HRyp.";
+    extraGroups = [
+      "wheel" # For sudo users
+      "plugdev" # Razer keyboard
+    ];
+    shell = pkgs.zsh;
   };
 }
