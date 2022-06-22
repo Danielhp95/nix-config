@@ -52,7 +52,7 @@
       {
         inherit self inputs;
 
-        channelsConfig = { allowUnfree = self.nixos.lib.mkForce false; };
+        channelsConfig = { allowUnfree = nixos.lib.mkForce false; };
 
         channels = {
           nixos = {

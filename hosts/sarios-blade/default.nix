@@ -1,4 +1,4 @@
-{ config, pkgs, profiles, ... }:
+{ config, pkgs, profiles, lib, ... }:
 
 {
   # Magically handles all function passing at the top of nix files
@@ -14,6 +14,9 @@
     ];
 
   boot = {
+    loader.efi = {
+      canTouchEfiVariables = true;
+    };
     loader.grub = {
       #device = "/dev/nvme0n1";
       device = "nodev";
@@ -22,11 +25,19 @@
       useOSProber = true;
       efiSupport = true;
     };
-    loader.efi.canTouchEfiVariables = true;
   };
 
+  # External displays don't work, but nvidia-smi works. For now we keep neouvou
+  # nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+  #     "nvidia-x11"
+  #     "nvidia-settings"
+  # ];
+  # services.xserver.videoDrivers = [ "nvidia" ];
+  # hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
+
+  hardware.opengl.enable = true;
+
   networking.hostName = "sarios-blade"; # Define your hostname.
-  # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.wireless.iwd.enable = true; # Enables iwctl REPL for connecting to the internet
   # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
@@ -46,26 +57,29 @@
     # useXkbConfig = true; # use xkbOptions in tty.
   };
 
-  # Enable the X11 windowing system.
-  # services.xserver.enable = true;
-
-
-  # Configure keymap in X11
-  # services.xserver.layout = "us";
-  # services.xserver.xkbOptions = {
-  #   "eurosign:e";
-  #   "caps:escape" # map caps to escape.
-  # };
-
   # Enable CUPS to print documents.
   # services.printing.enable = true;
 
   # Enable sound.
   sound.enable = true;
+  sound.mediaKeys.enable = true;
   hardware.pulseaudio.enable = true;
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
+  # bluetooth
+  hardware.bluetooth.enable = true;
+  #services.blueman.enable = true;  # GUI for bluetooth, maybe not needed?
+  hardware.bluetooth.settings = {
+    # To enable A2DP Sink (high quality)
+    General = {
+      Enable = "Source,Sink,Media,Socket";
+    };
+  };
+  hardware.pulseaudio = {
+    package = pkgs.pulseaudioFull; # Use package with extra stuff
+  };
+
+  # Razer keyboard support
+  hardware.openrazer.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.mutableUsers = false;
@@ -75,28 +89,13 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     wget
-    xorg.xf86inputlibinput # for razer trackpad
     git
+    xorg.xf86inputlibinput # for razer trackpad
+    razergenie # For razer keyboard
   ];
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
