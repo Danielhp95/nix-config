@@ -20,6 +20,11 @@ let
         bindsym Escape mode "default"
     }
   '';
+  # TODO: screenshot mode
+  # screenshotMode = ''
+  #   set $mode_system (a)area, (e)all, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
+
+  # '';
   mod = config.wayland.windowManager.sway.config.modifier;
   # sway uses `app_id` instead of `class` for app identification
   criteriaRewrite = criteria: builtins.removeAttrs
@@ -36,6 +41,9 @@ in
 
     # screenshots/recording
     sway-contrib.grimshot # screenshots
+
+    brightnessctl # Controlling screen brightness
+    fcitx5 # Multi-language keyboard support
   ];
 
   home.sessionVariables = {
@@ -43,11 +51,13 @@ in
     XDG_CURRENT_DESKTOP = "sway";
     XDG_SESSION_TYPE = "wayland";
     SDL_VIDEODRIVER = "wayland";
+    # TODO: maybe move these to their own keyboard setting profile?
+    GTK_IM_MODULE = "fcitx5";
+    QT_IM_MODULE = "fcitx5";
   };
 
   wayland.windowManager.sway = {
     enable = true;
-    #systemdIntegration = true;
     extraConfig = base + powerOffMode;
     extraOptions = [ "--unsupported-gpu" ];
     wrapperFeatures.gtk = true;
@@ -62,7 +72,7 @@ in
       #menu = ''"rofi -show-icons -modi ssh,drun,filebrowser,emoji -show drun"'';
       menu = ''"rofi -show-icons -modi drun -show drun"'';
       gaps = {
-        inner = 14;
+        inner = 9;
         outer = -2;
         smartGaps = true;
         smartBorders = "on";
@@ -71,10 +81,10 @@ in
         "2" = [
           { class = "Firefox$"; }
         ];
-        "3" = [
+        "9" = [
           { class = "Signal"; }
           { class = "telegramdesktop"; }
-          { class = "evolution"; }
+          { class = "element"; }
         ];
       };
       focus.newWindow = "urgent";
@@ -110,16 +120,19 @@ in
         "${mod}+Shift+n" = "move scratchpad, scratchpad show, resize set 1912 1043, move position 4 4";
 
         # bind brightnessctl to function keys
+        # TODO: Show brightness levels on notification
         "XF86MonBrightnessUp" = "exec brightnessctl set 5+%; notify-send 'brightness up'";
         "XF86MonBrightnessDown" = "exec brightnessctl set 5%-; notify-send 'brightness down'";
         "Shift+XF86MonBrightnessDown" = "exec brightnessctl set 1%; notify-send 'brightness low'";
+        "Shift+XF86MonBrightnessUp" = "exec brightnessctl set 100%; notify-send 'brightness max'";
 
         # Pulse Audio controls
-        "XF86AudioRaiseVolume" = "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-volume 0 +5%"; #increase sound volume
-        "XF86AudioLowerVolume" = "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-volume 0 -5%"; #decrease sound volume
-        "XF86AudioMute" = "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-mute 0 toggle"; # mute sound
+        "XF86AudioRaiseVolume" = "exec --no-startup-id ${pkgs.alsa-utils}/bin/amixer sset Master 5%+"; #increase sound volume
+        "XF86AudioLowerVolume" = "exec --no-startup-id ${pkgs.alsa-utils}/bin/amixer sset Master 5%-"; #decrease sound volume
+        "XF86AudioMute" = "exec --no-startup-id ${pkgs.alsa-utils}/bin/amixer sset Master toggle"; # mute sound
 
-        # playerctl media controls
+        # TODO: not working with spotify
+        # Media control
         "XF86AudioPlay" = "exec --no-startup-id ${pkgs.playerctl}/bin/playerctl play-pause";
         "XF86AudioNext" = "exec --no-startup-id ${pkgs.playerctl}/bin/playerctl next";
         "XF86AudioPrev" = "exec --no-startup-id ${pkgs.playerctl}/bin/playerctl previous";
@@ -134,6 +147,9 @@ in
         { command = "exec mako"; always = true; }
         { command = "systemctl --user restart waybar"; always = true; }
         { command = "systemctl --user restart kanshi"; always = true; }
+        { command = "dbus-update-activation-environment --systemd DISPLAY"; always = true; } # Chris hack for something
+        { command = "echo XHC | sudo tee /proc/acpi/wakeup"; always = true; } # RAZER BLADE 2018 usb wakeup FIX:
+        { command = "tmux start-server"; always = true; }
         {
           # locks screen after 5 mins + turns off/on monitors
           always = true;
@@ -147,6 +163,7 @@ in
         }
       ];
       # waybar is configured separately
+      # This has to be empty to disable ugly default bar at the bottom
       bars = [ ];
     };
   };
