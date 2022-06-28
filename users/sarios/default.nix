@@ -8,6 +8,7 @@
       shell.zsh
       shell.starship
       shell.vim.neovim
+      shell.tmux
       desktop.sway
       desktop.swaylock
       desktop.sound
@@ -26,9 +27,16 @@
       bat
       delta
       element-desktop
+      mpv
+      spotify
+      # texlive.combined.scheme-full ADD: TODO: figure out how to have this project specific
+      zathura # Pdf reader
+      feh # image viewer
     ];
 
   };
+
+  # To have fzf tab work on system wide commands
   environment.pathsToLink = [ "/share/zsh" ];
   users.users.sarios = {
     isNormalUser = true;
@@ -36,7 +44,11 @@
     extraGroups = [
       "wheel" # For sudo users
       "plugdev" # Razer keyboard
+      "openrazer" # require by the openrazer daemon
     ];
     shell = pkgs.zsh;
   };
+
+  # Activate spotify as a daemons
+  services.spotifyd.enable = true;
 }
