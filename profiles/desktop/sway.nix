@@ -8,8 +8,9 @@
     rofi
     wezterm
   ];
-  xdg.portal.gtkUsePortal = true;
-  xdg.portal.extraPortals = with pkgs; [
-    xdg-desktop-portal-wlr
-  ];
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+    gtkUsePortal = true;
+  };
 }

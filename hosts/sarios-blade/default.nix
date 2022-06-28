@@ -13,6 +13,7 @@
       profiles.core.nixos # TODO: Improve naming
     ];
 
+  # This didn't work for dual boot
   boot = {
     loader.efi = {
       canTouchEfiVariables = true;
@@ -27,30 +28,27 @@
     };
   };
 
-  # External displays don't work, but nvidia-smi works. For now we keep neouvou
-  # nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-  #     "nvidia-x11"
-  #     "nvidia-settings"
-  # ];
-  # services.xserver.videoDrivers = [ "nvidia" ];
-  # hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "obsidian"
+    "spotify"
+    "spotify-unwrapped"
+  ];
 
   hardware.opengl.enable = true;
 
   networking.hostName = "sarios-blade"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.wireless.iwd.enable = true; # Enables iwctl REPL for connecting to the internet
-  # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
   # Set your time zone.
   time.timeZone = "Europe/Amsterdam";
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_GB.UTF-8";
+  # Keyboard settings and multi-language support
+  i18n = {
+    defaultLocale = "en_GB.UTF-8";
+    supportedLocales = [ "en_GB.UTF-8/UTF-8" "zh_CN.UTF-8/UTF-8" ];
+    inputMethod.enabled = "fcitx5";
+    inputMethod.fcitx5.addons = with pkgs; [ fcitx5-chinese-addons fcitx5-rime fcitx5-configtool fcitx5-table-extra fcitx5-table-other ];
+  };
   console = {
     font = "Lat2-Terminus16";
     keyMap = "uk";
@@ -66,20 +64,22 @@
   hardware.pulseaudio.enable = true;
 
   # bluetooth
-  hardware.bluetooth.enable = true;
-  #services.blueman.enable = true;  # GUI for bluetooth, maybe not needed?
-  hardware.bluetooth.settings = {
-    # To enable A2DP Sink (high quality)
-    General = {
+  hardware.bluetooth = {
+    enable = true;
+    package = pkgs.bluezFull;
+    settings.General = {
+      # To enable A2DP Sink (high quality)
       Enable = "Source,Sink,Media,Socket";
     };
   };
+
   hardware.pulseaudio = {
     package = pkgs.pulseaudioFull; # Use package with extra stuff
   };
 
   # Razer keyboard support
   hardware.openrazer.enable = true;
+  hardware.openrazer.users = [ "sarios" ]; # Maybe this is repeated with "users/sarios/default.nix"
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.mutableUsers = false;
@@ -96,6 +96,7 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+  services.pipewire.enable = true; # hopefully to solve swaybar issue
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
@@ -104,5 +105,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "22.05"; # Did you read the comment?
-
 }
