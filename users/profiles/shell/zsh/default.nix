@@ -36,11 +36,10 @@ in
       autoload -U edit-command-line
       zle -N edit-command-line
       bindkey '\C-e\C-e' edit-command-line
-
     '';
     autocd = true;
     dotDir = ".config/zsh";
-    defaultKeymap = "emacs";  # this is the default, don't get scared
+    defaultKeymap = "emacs"; # this is the default, don't get scared
     enableAutosuggestions = true;
     enableCompletion = true;
     envExtra = ''
@@ -99,7 +98,7 @@ in
           rev = "caa749d030d22168445c4cb97befd406d2828db0";
           sha256 = "sha256-YV9lpJ0X2vN9uIdroDWEize+cp9HoKegS3sZiSpNk50=";
         };
-       }
+      }
     ];
   };
 }
