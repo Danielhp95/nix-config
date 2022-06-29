@@ -11,6 +11,7 @@
       shell.tmux
       desktop.sway
       desktop.swaylock
+      desktop.rofi.rofi
       desktop.sound
       obsidian
       waybar

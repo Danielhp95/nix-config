@@ -5,7 +5,7 @@
     slurp
     swaylock
     dmenu
-    rofi
+    # rofi
     wezterm
   ];
   xdg.portal = {

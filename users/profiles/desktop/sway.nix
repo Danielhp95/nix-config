@@ -20,12 +20,22 @@ let
         bindsym Escape mode "default"
     }
   '';
-  # TODO: screenshot mode
-  # screenshotMode = ''
-  #   set $mode_system (a)area, (e)all, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
-
-  # '';
+  screenshotMode = ''
+    set $mode_screenshot Shift to copy (a)area select, (t)arget window (s)screen
+    bindsym $mod+ctrl+s mode "$mode_screenshot"
+    mode "$mode_screenshot" {
+      bindsym a exec --no-startup-id grimshot save area   "$HOME/Pictures/screenshots/$(date +%d-%m-%y_%T).png", mode "default"
+      bindsym s exec --no-startup-id grimshot save screen "$HOME/Pictures/screenshots/$(date +%d-%m-%y_%T).png" , mode "default"
+      bindsym t exec --no-startup-id grimshot save window "$HOME/Pictures/screenshots/$(date +%d-%m-%y_%T).png", mode "default"
+      bindsym Shift+a exec --no-startup-id grimshot copy area, mode "default"
+      bindsym Shift+s exec --no-startup-id grimshot copy screen, mode "default"
+      bindsym Shift+t exec --no-startup-id grimshot copy window, mode "default"
+      bindsym Return mode "default"
+      bindsym Escape mode "default"
+    }
+  '';
   mod = config.wayland.windowManager.sway.config.modifier;
+  # TODO: change this
   # sway uses `app_id` instead of `class` for app identification
   criteriaRewrite = criteria: builtins.removeAttrs
     (criteria // {
@@ -54,11 +64,12 @@ in
     # TODO: maybe move these to their own keyboard setting profile?
     GTK_IM_MODULE = "fcitx5";
     QT_IM_MODULE = "fcitx5";
+    XDG_SCREENSHOTS_DIR = "$HOME/Pictures/screenshots"; # This makes grim run from the commandline work, but not when used here!
   };
 
   wayland.windowManager.sway = {
     enable = true;
-    extraConfig = base + powerOffMode;
+    extraConfig = base + powerOffMode + screenshotMode;
     extraOptions = [ "--unsupported-gpu" ];
     wrapperFeatures.gtk = true;
     config = {
@@ -116,26 +127,31 @@ in
         "${mod}+Print" = "exec grimshot copy area";
         "${mod}+Shift+Print" = "exec grimshot save screen";
 
-        # weird movement
+        # Rofi
+        "${mod}+Shift+o" = "exec --no-startup-id rofi -show file-browser-extended";
+        "${mod}+Shift+b" = "exec --no-startup-id bash ~/config/users/profiles/desktop/rofi/scripts/choose_bluetooth_device_from_paired.sh";
+        "${mod}+Shift+p" = "exec --no-startup-id bash ~/config/users/profiles/desktop/rofi/scripts/open_paper.sh";
+
+        # Put on scratchpad which maximes a 1080p screen
         "${mod}+Shift+n" = "move scratchpad, scratchpad show, resize set 1912 1043, move position 4 4";
 
         # bind brightnessctl to function keys
         # TODO: Show brightness levels on notification
-        "XF86MonBrightnessUp" = "exec brightnessctl set 5+%; notify-send 'brightness up'";
-        "XF86MonBrightnessDown" = "exec brightnessctl set 5%-; notify-send 'brightness down'";
-        "Shift+XF86MonBrightnessDown" = "exec brightnessctl set 1%; notify-send 'brightness low'";
-        "Shift+XF86MonBrightnessUp" = "exec brightnessctl set 100%; notify-send 'brightness max'";
+        "XF86MonBrightnessUp" = "exec brightnessctl set 5+%";
+        "XF86MonBrightnessDown" = "exec brightnessctl set 5%-";
+        "Shift+XF86MonBrightnessDown" = "exec brightnessctl set 1%";
+        "Shift+XF86MonBrightnessUp" = "exec brightnessctl set 100%";
 
         # Pulse Audio controls
-        "XF86AudioRaiseVolume" = "exec --no-startup-id ${pkgs.alsa-utils}/bin/amixer sset Master 5%+"; #increase sound volume
-        "XF86AudioLowerVolume" = "exec --no-startup-id ${pkgs.alsa-utils}/bin/amixer sset Master 5%-"; #decrease sound volume
-        "XF86AudioMute" = "exec --no-startup-id ${pkgs.alsa-utils}/bin/amixer sset Master toggle"; # mute sound
+        "XF86AudioRaiseVolume" = "exec --no-startup-id amixer sset Master 5%+"; #increase sound volume
+        "XF86AudioLowerVolume" = "exec --no-startup-id amixer sset Master 5%-"; #decrease sound volume
+        "XF86AudioMute" = "exec --no-startup-id amixer sset Master toggle"; # mute sound
+        "${mod}+Shift+m" = "exec pavucontrol";
 
-        # TODO: not working with spotify
         # Media control
-        "XF86AudioPlay" = "exec --no-startup-id ${pkgs.playerctl}/bin/playerctl play-pause";
-        "XF86AudioNext" = "exec --no-startup-id ${pkgs.playerctl}/bin/playerctl next";
-        "XF86AudioPrev" = "exec --no-startup-id ${pkgs.playerctl}/bin/playerctl previous";
+        "XF86AudioPlay" = "exec --no-startup-id playerctl play-pause";
+        "XF86AudioNext" = "exec --no-startup-id playerctl next";
+        "XF86AudioPrev" = "exec --no-startup-id playerctl previous";
       });
       input = {
         "*" = {
