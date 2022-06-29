@@ -9,6 +9,7 @@
       shell.starship
       shell.vim.neovim
       shell.tmux
+      shell.kitty
       desktop.sway
       desktop.swaylock
       desktop.rofi.rofi
@@ -20,7 +21,6 @@
     home.packages = with pkgs; [
       firefox
       tmux
-      kitty
       alacritty
       bottom
       tdesktop
@@ -33,6 +33,7 @@
       # texlive.combined.scheme-full ADD: TODO: figure out how to have this project specific
       zathura # Pdf reader
       feh # image viewer
+      deluge # Torrent client
     ];
 
   };
