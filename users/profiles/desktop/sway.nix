@@ -46,6 +46,7 @@ in
   home.packages = with pkgs; [
     # display / lockscreen
     swayidle # autolock
+    swaybg # Background
     wdisplays # display management
     wl-clipboard # clipboard mgmt
 
@@ -69,7 +70,8 @@ in
 
   wayland.windowManager.sway = {
     enable = true;
-    extraConfig = base + powerOffMode + screenshotMode;
+    extraConfig = base + powerOffMode + screenshotMode +
+      ''output "*" bg $HOME/Pictures/hangmoon/purple-blue-meadow-couple-sitting.jpg fill''; # Sets wallpaper on all outputs
     extraOptions = [ "--unsupported-gpu" ];
     wrapperFeatures.gtk = true;
     config = {
@@ -157,6 +159,7 @@ in
         "*" = {
           xkb_layout = "gb";
           xkb_options = "caps:escape";
+          tap = "enabled";
         };
       };
       startup = [

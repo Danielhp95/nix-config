@@ -13,6 +13,7 @@ in
     show-failed-attempts
     daemonize
     show-keyboard-layout
+    image="/home/sarios/Pictures/hangmoon/purple-blue-meadow-couple-sitting.jpg"
   '';
   /*
     home.file.".config/swaylock/config".text = with colors; ''
