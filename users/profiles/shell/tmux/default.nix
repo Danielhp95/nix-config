@@ -13,7 +13,7 @@ in
     aggressiveResize = true;
     escapeTime = 0;
     shell = "${pkgs.zsh}/bin/zsh";
-    terminal = "xterm-256color";
+    terminal = "tmux-256color";
     extraConfig = tmuxConf;
     plugins = with pkgs; [
       { plugin = tmuxPlugins.resurrect; }

@@ -124,11 +124,6 @@ in
         };
       };
       keybindings = mkOptionDefault ({
-        # screenshots
-        Print = "exec grimshot save area";
-        "${mod}+Print" = "exec grimshot copy area";
-        "${mod}+Shift+Print" = "exec grimshot save screen";
-
         # Rofi
         "${mod}+Shift+o" = "exec --no-startup-id rofi -show file-browser-extended";
         "${mod}+Shift+b" = "exec --no-startup-id bash ~/config/users/profiles/desktop/rofi/scripts/choose_bluetooth_device_from_paired.sh";
@@ -154,6 +149,12 @@ in
         "XF86AudioPlay" = "exec --no-startup-id playerctl play-pause";
         "XF86AudioNext" = "exec --no-startup-id playerctl next";
         "XF86AudioPrev" = "exec --no-startup-id playerctl previous";
+
+        # Moving workspaces around
+        "${mod}+Control+Shift+Right" = "move workspace to output right";
+        "${mod}+Control+Shift+Left" = "move workspace to output left";
+        "${mod}+Control+Shift+Down" = "move workspace to output down";
+        "${mod}+Control+Shift+Up" = "move workspace to output up";
       });
       input = {
         "*" = {

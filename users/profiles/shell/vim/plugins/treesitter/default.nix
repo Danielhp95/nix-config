@@ -1,10 +1,10 @@
-{ pkgs, ... }:
+# Syntax highlighting for most languages using ASTs
+{ pkgs, dsl, ... }:
+with dsl;
 {
-  programs.neovim.plugins = with pkgs.vimPlugins; [
-    {
-      plugin = nvim-treesitter.withPlugins (_: pkgs.tree-sitter.allGrammars);
-      type = "lua";
-      config = builtins.readFile ./treesitter.lua;
-    }
+  plugins = with pkgs.vimPlugins; [
+    nvim-treesitter
+    playground # playground for treesitter
   ];
+  lua = builtins.readFile ./treesitter.lua;
 }

@@ -1,28 +1,17 @@
 { config, pkgs, ... }:
 
-with pkgs.lib;
-let
-  #stylecss = builtins.readFile ./lightweight.css;
-  #colorsRelPath = ".config/waybar/colors.css";
-  #colors = config.lib.base16.getColorsH "waybar";
-in
 {
-  #home.file."${colorsRelPath}".text = concatStringsSep "\n"
-  #  (mapAttrsToList (name: value: "@define-color ${name} ${value};") colors);
-
   programs.waybar = {
     enable = true;
     systemd.enable = true;
-    #style = ''
-    #  @import "/home/${config.home.username}/${colorsRelPath}";
-    #'' + stylecss;
-    settings = [{
+    # TODO: style
+    settings = { mainbar = {
       layer = "top";
       position = "top";
       height = 30;
-      modules-left = [ "sway/workspaces" "sway/mode" ];
-      modules-center = [ "clock" ];
-      modules-right = [ "idle_inhibitor" "pulseaudio" "network" "cpu" "memory" "disk" "temperature" "battery" "tray" ];
+      modules-left = [ "clock" "idle_inhibitor" ];
+      modules-center = [ "sway/workspaces" "sway/mode" ];
+      modules-right = [ "pulseaudio" "network" "cpu" "memory" "disk" "temperature" "backlight" "battery" "tray" ];
       modules = {
         "sway/workspaces" = {
           disable-scroll = true;
@@ -80,11 +69,11 @@ in
           format = " {temperatureC}°C {icon}";
           format-icons = [ "" "" "" ];
         };
-        #"backlight" = {
-        #  device = "acpi_video1";
-        #  format = "{percent}% {icon}";
-        #  format-icons = [ "" "" ];
-        #};
+        "backlight" = {
+          device = "acpi_video1";
+          format = "{percent}% {icon}";
+          format-icons = [ "" "" ];
+        };
         "network" = {
           # "interface" = "wlp2*", // (Optional) To force the use of this interface
           format-wifi = "{essid} ({signalStrength}%) ";
@@ -99,8 +88,9 @@ in
           format-bluetooth = "{volume}% {icon} {format_source}";
           format-bluetooth-muted = " {icon} {format_source}";
           format-muted = " {format_source}";
-          format-source = "{volume}% ";
-          format-source-muted = "";
+          # No need for microphone
+          # format-source = "{volume}% ";
+          # format-source-muted = "";
           format-icons = {
             headphone = "";
             hands-free = "";
@@ -117,6 +107,6 @@ in
           spacing = 10;
         };
       };
-    }];
+    };};
   };
 }

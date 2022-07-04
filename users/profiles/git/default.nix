@@ -2,8 +2,22 @@
   programs.git = {
     enable = true;
 
+    delta = {
+      enable = true;
+      options = {
+        #side-by-side = true; TODO: Test if we want this
+        features = "decorations";
+      };
+    };
+
     extraConfig = {
       pull.rebase = false;
+      pager = {
+        diff = "delta";
+        show = "delta";
+        log = "delta";
+        reflog = "delta";
+      };
     };
 
     aliases = {

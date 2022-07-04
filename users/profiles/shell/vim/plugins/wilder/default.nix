@@ -1,8 +1,11 @@
+# Fancy vim menus for ':', ':', '/', '?'
+# allows fuzzy searching terms better
 { pkgs, ... }:
 {
-  programs.neovim.plugins = [{
-    plugin = pkgs.vimPlugins.wilder-nvim;
-    type = "lua";
-    config = builtins.readFile ./wilder.lua;
-  }];
+  plugins = with pkgs; [
+    vimPlugins.wilder-nvim
+    vimPlugins.cpsm
+    fd
+  ];
+  lua = builtins.readFile ./wilder.lua;
 }

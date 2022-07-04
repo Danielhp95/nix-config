@@ -1,3 +1,7 @@
+# Project management with telescope
+# - auto searchs in homedir for git repos
+# - move between projects (change working dir)
+# - search inside projects
 { pkgs, ... }:
 {
   programs.neovim.plugins = with pkgs.vimPlugins; [

@@ -34,6 +34,11 @@
 
 local cmp = require'cmp'
 cmp.setup({
+    snippet = {
+        expand = function(args)
+            vim.fn["vsnip#anonymous"](args.body)
+        end,
+    },
     mapping = {
         ['<C-j>'] = cmp.mapping.select_next_item(),
         ['<C-k>'] = cmp.mapping.select_prev_item(),
@@ -42,7 +47,7 @@ cmp.setup({
         ['<C-b>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
         ['<C-e>'] = cmp.mapping.abort(),
-        ['<CR>'] = cmp.mapping.confirm({ select = true }),
+        ['<CR>'] = cmp.mapping.confirm({ select = false }),
     },
     sources = {
         { name = 'path' },
@@ -63,6 +68,7 @@ cmp.setup({
                 buffer = "[Buffer]",
                 nvim_lsp = "[LSP]",
                 luasnip = "[LuaSnip]",
+                vsnip = "[VSnip]",
                 nvim_lua = "[Lua]",
                 latex_symbols = "[Latex]",
                 --orgmode = "[Org]",

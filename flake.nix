@@ -33,6 +33,11 @@
 
       nixos-hardware.url = "github:nixos/nixos-hardware";
       nixos-generators.url = "github:nix-community/nixos-generators";
+
+      nix2vim = {
+        url = "github:gytis-ivaskevicius/nix2vim";
+        inputs.nixpkgs.follows = "nixos";
+      };
     };
 
   outputs =
@@ -57,7 +62,7 @@
         channels = {
           nixos = {
             imports = [ (digga.lib.importOverlays ./overlays) ];
-            overlays = [ ];
+            overlays = [ self.inputs.nix2vim.overlay ];
           };
           latest = { };
         };

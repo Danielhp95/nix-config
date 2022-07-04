@@ -1,16 +1,23 @@
-{ pkgs, ... }:
-{
-  programs.neovim.plugins = with pkgs.vimPlugins; [
-    {
-      plugin = nvim-cmp;
-      type = "lua";
-      config = builtins.readFile ./cmp.lua;
-    }
+# Completion engine for neovim
+{ pkgs, dsl, ... }:
+with dsl; {
+  plugins = with pkgs.vimPlugins; [
+    nvim-lspconfig
+    lsp_signature-nvim
+    lspkind-nvim
     nvim-cmp
     cmp-nvim-lsp
     cmp-buffer
     cmp-vsnip
-    cmp-path
   ];
+
+  setup.lsp_signature = {
+    bind = true;
+    hint_enable = false;
+    hi_parameter = "Visual";
+    handler_opts.border = "single";
+  };
+
+  lua = builtins.readFile ./cmp.lua;
 
 }
