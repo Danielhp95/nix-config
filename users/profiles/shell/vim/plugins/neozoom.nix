@@ -8,9 +8,6 @@ in
     neozoom-nvim
   ];
   # add in terminal mapping to close Term
-  _internal.which-key.neozoom = {
-    "['<leader>']".s.s = cmd "NeoZoomToggle" "Toggle NeoZoom";
-  };
   use.neo-zoom.setup = callWith {
     width_ratio = 0.9;
     left_ratio = 0.03;

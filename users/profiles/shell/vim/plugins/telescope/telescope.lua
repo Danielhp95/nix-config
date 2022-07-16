@@ -6,7 +6,6 @@ local previewers = require'telescope.previewers'
 local from_entry = require'telescope.from_entry'
 local actions_set = require'telescope.actions.set'
 local utils = require'telescope.utils'
-local putils = require('telescope.previewers.utils')
 local action_set = require('telescope.actions.set')
 
 local function action_edit_ctrl_l(prompt_bufnr)
@@ -19,11 +18,31 @@ end
 
 require('telescope').setup {
   defaults = {
+      -- Appearance
+      entry_prefix = "  ",
+      prompt_prefix = "   ",
+      selection_caret = "  ",
+      color_devicons = true,
+      path_display = { "smart" },
+
+      sorting_strategy = "ascending",
+      layout_strategy = "horizontal",
       layout_config = {
-          prompt_position = "bottom",
+        horizontal = {
+          prompt_position = "top",
+          preview_width = 0.55,
+          results_width = 0.8,
+        },
+        vertical = { mirror = false },
+        width = 0.87,
+        height = 0.80,
+        preview_cutoff = 50,
       },
-      sorting_strategy = "descending",
-      layout_strategy = 'horizontal',
+      --layout_config = {
+      --    prompt_position = "bottom",
+      --},
+      -- sorting_strategy = "descending",
+      -- layout_strategy = 'horizontal',
       mappings = {
           i = {
               ["<C-u>"] = false,
@@ -46,6 +65,10 @@ require('telescope').setup {
       buffers = {
           ignore_current_buffer = true,
           sort_mru = true,
+          mappings = {
+            i = { ['<c-x>'] = 'delete_buffer' },
+            n = { ['<c-x>'] = 'delete_buffer' },
+          },
       },
   },
   extensions = {
@@ -54,7 +77,7 @@ require('telescope').setup {
       override_generic_sorter = true,  -- override the generic sorter
       override_file_sorter = true,     -- override the file sorter
       case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
-                                       -- the default case_mode is "smart_case"
+                                      -- the default case_mode is "smart_case"
     }
   }
 }

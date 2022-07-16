@@ -1,4 +1,4 @@
-{dsl, ...}:
+{ dsl, ... }:
 
 with dsl;
 {
@@ -18,6 +18,10 @@ with dsl;
     showmatch = true;
     ignorecase = true;
     smartcase = true;
+    inccommand = "split";
+    incsearch = true;
+    tabstop = 2;
+    shiftwidth = 2;
     cursorline = true;
     wrap = true;
     autoindent = true;
@@ -25,8 +29,8 @@ with dsl;
     splitbelow = false;
     splitright = true;
     number = true;
-  # This breaks nvim by making the file title show up everytime there's an addition!!!
-  #  title = true;
+    # This breaks nvim by making the file title show up everytime there's an addition!!!
+    #  title = true;
     undofile = true;
     hidden = true;
     list = true;

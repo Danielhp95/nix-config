@@ -8,13 +8,16 @@ with dsl;
     nightfox-nvim
     lualine-nvim
     tabline-nvim
+    onedarkpro-nvim
     nvim-web-devicons
   ];
 
+  setup.onedarkpro = callWith { theme = "onedark_vivid"; };
   vimscript = ''
     set termguicolors
     colorscheme dracula
   '';
+
   # setup.tabline.show_index = false;
 
   setup.lualine = {
@@ -26,20 +29,20 @@ with dsl;
       globalstatus = false;
     };
     sections = {
-      lualine_a = ["%{&spell ? '[en_GB.utf8]' : ''}"  "mode"];
-      lualine_b = ["branch" "diff" "diagnostics"];
-      lualine_c = ["filename"];
-      lualine_x = ["filetype"];
-      lualine_y = ["progress"];
-      lualine_z = ["location"];
+      lualine_a = [ "%{&spell ? 'SPELL' : ':3'}" "mode" ];
+      lualine_b = [ "branch" "diff" "diagnostics" ];
+      lualine_c = [ "filename" ];
+      lualine_x = [ "filetype" ];
+      lualine_y = [ "progress" ];
+      lualine_z = [ "location" ];
     };
     inactive_sections = {
-      lualine_a = [];
-      lualine_b = ["filetype"];
-      lualine_c = ["filename"];
-      lualine_x = ["location"];
-      lualine_y = [];
-      lualine_z = [];
+      lualine_a = [ ];
+      lualine_b = [ "filetype" ];
+      lualine_c = [ "filename" ];
+      lualine_x = [ "location" ];
+      lualine_y = [ ];
+      lualine_z = [ ];
     };
     tabline = { };
     extensions = [ ];

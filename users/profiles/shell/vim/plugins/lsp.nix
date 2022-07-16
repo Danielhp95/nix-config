@@ -8,6 +8,7 @@ with dsl; {
 
     # Languages
     vim-nix # nix
+    lsp_signature-nvim
     pkgs.texlab # latex
     pkgs.sumneko-lua-language-server # lua
     pkgs.nodePackages.pyright # Python
@@ -18,6 +19,9 @@ with dsl; {
     cmd = [ "${pkgs.pyright}/bin/pyright" ];
   };
 
+  # To have nice function signature show up in insert mode
+  setup.lsp_signature = callWith { };
+
   # Lua
   use.lspconfig.sumneko_lua.setup = callWith {
     cmd = [ "${pkgs.sumneko-lua-language-server}/bin/lua-language-server" ];
@@ -25,7 +29,7 @@ with dsl; {
       Lua = {
         diagnostics = {
           # Get the language server to recognize the `vim` global
-          globals = ["vim"];
+          globals = [ "vim" ];
         };
       };
     };

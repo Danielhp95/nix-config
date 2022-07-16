@@ -4,6 +4,7 @@
     ./options.nix
     ./mappings/mappings.nix
     ./plugins/essentials.nix
+    ./plugins/bufferline.nix
     ./plugins/style.nix
     ./plugins/telescope
     ./plugins/cmp

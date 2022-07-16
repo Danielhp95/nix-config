@@ -12,19 +12,20 @@ in
     which-key-nvim
 
     vim-oscyank # copy anywhere
+    comment-nvim # Comments
 
     undotree # view all undo/repo operations
     # vim-unimpaired # movements options with [
     luasnip # Snippet engine
     friendly-snippets # more snippets
     # Make sure to add mapping for this
-    vim-togglelist # toggle location + quickfix lists
 
     # Dependencies
     deoplete-nvim # async operations (dependency)
     nvim-yarp # dependency for deoplete
   ];
 
+  setup.Comment = callWith { };
   lua = lib.mkBefore ''
     function strEmpty(s)
       return s == nil or s == ""
@@ -47,14 +48,6 @@ in
     # Remap escape passthrough to <C-\><C-n>
     "<C-\\\\><C-n>" = "<Esc>";
     "<C-Space>" = "<C-\\\\><C-n> :ToggleTerm<cr>";
-  };
-
-  vnoremap = {
-    "<Leader>y" = ":OSCYank<CR>";
-  };
-  nnoremap = {
-    "<Leader>Y" = "v$:OSCYank<CR>";
-    "<Leader>yy" = "V:OSCYank<CR>";
   };
 
   # use.which-key.register = dsl.callWith (lib.foldl' lib.recursiveUpdate

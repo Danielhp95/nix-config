@@ -8,9 +8,10 @@ with dsl; {
     nvim-cmp
     cmp-nvim-lsp
     cmp-buffer
-    cmp-vsnip
+    cmp_luasnip
   ];
 
+  # TODO: not working?
   setup.lsp_signature = {
     bind = true;
     hint_enable = false;

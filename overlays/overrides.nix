@@ -16,4 +16,6 @@ channels: final: prev: {
     deploy-rs
     ;
 
+  # To have all nice tree-sitter grammars
+  nvim-treesitter-all = prev.vimPlugins.nvim-treesitter.withPlugins (_: final.tree-sitter.allGrammars);
 }

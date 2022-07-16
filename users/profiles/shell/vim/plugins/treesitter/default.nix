@@ -3,7 +3,7 @@
 with dsl;
 {
   plugins = with pkgs.vimPlugins; [
-    nvim-treesitter
+    pkgs.nvim-treesitter-all
     playground # playground for treesitter
   ];
   lua = builtins.readFile ./treesitter.lua;
