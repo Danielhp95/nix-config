@@ -13,6 +13,7 @@
       desktop.sway
       desktop.swaylock
       desktop.rofi
+      desktop.zathura
       desktop.sound
       obsidian
       waybar
@@ -30,7 +31,6 @@
       element-desktop
       mpv
       spotify
-      zathura # Pdf reader
       feh # image viewer
       deluge # Torrent client
     ];
