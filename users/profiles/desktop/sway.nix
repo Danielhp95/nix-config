@@ -140,9 +140,9 @@ in
         "Shift+XF86MonBrightnessUp" = "exec brightnessctl set 100%";
 
         # Pulse Audio controls
-        "XF86AudioRaiseVolume" = "exec --no-startup-id amixer sset Master 5%+"; #increase sound volume
-        "XF86AudioLowerVolume" = "exec --no-startup-id amixer sset Master 5%-"; #decrease sound volume
-        "XF86AudioMute" = "exec --no-startup-id amixer sset Master toggle"; # mute sound
+        "XF86AudioRaiseVolume" = "exec --no-startup-id pamixer -i 5"; # increase sound volume
+        "XF86AudioLowerVolume" = "exec --no-startup-id pamixer -d 5"; # decrease sound volume
+        "XF86AudioMute" = "exec --no-startup-id pamixer --toggle-mute"; # mute sound
         "${mod}+Shift+m" = "exec pavucontrol";
 
         # Media control

@@ -1,4 +1,4 @@
-{ config, pkgs, profiles, lib, ... }:
+{ config, pkgs, profiles, lib, services, ... }:
 
 {
   # Magically handles all function passing at the top of nix files
@@ -46,7 +46,7 @@
   i18n = {
     defaultLocale = "en_GB.UTF-8";
     supportedLocales = [ "en_GB.UTF-8/UTF-8" "zh_CN.UTF-8/UTF-8" ];
-    inputMethod.enabled = "fcitx5";
+    inputMethod.enabled = "fcitx5"; # Not working!
     inputMethod.fcitx5.addons = with pkgs; [ fcitx5-chinese-addons fcitx5-rime fcitx5-configtool fcitx5-table-extra fcitx5-table-other ];
   };
   console = {
@@ -59,9 +59,10 @@
   # services.printing.enable = true;
 
   # Enable sound.
-  sound.enable = true;
+  # Disabling because it seems to have issue with pipewire
+  # source: https://nixos.wiki/wiki/PipeWire
+  # sound.enable = true;
   sound.mediaKeys.enable = true;
-  hardware.pulseaudio.enable = true;
 
   # bluetooth
   hardware.bluetooth = {
@@ -73,9 +74,50 @@
     };
   };
 
-  hardware.pulseaudio = {
-    package = pkgs.pulseaudioFull; # Use package with extra stuff
+  # -- Pulseaudio
+  # hardware.pulseaudio.enable = true;
+  # hardware.pulseaudio = {
+  # package = pkgs.pulseaudioFull; # Use package with extra stuff
+  # };
+
+  # -- Pipewire
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    # jack.enable = true;  # If JACK applications are needed
+    # If you want to use JACK applications, uncomment this
+    #jack.enable = true;
+    media-session.config.bluez-monitor.rules = [
+      {
+        # Matches all cards
+        matches = [{ "device.name" = "~bluez_card.*"; }];
+        actions = {
+          "update-props" = {
+            "bluez5.reconnect-profiles" = [ "hfp_hf" "hsp_hs" "a2dp_sink" ];
+            # mSBC is not expected to work on all headset + adapter combinations.
+            "bluez5.msbc-support" = true;
+            # SBC-XQ is not expected to work on all headset + adapter combinations.
+            "bluez5.sbc-xq-support" = true;
+          };
+        };
+      }
+      {
+        matches = [
+          # Matches all sources
+          { "node.name" = "~bluez_input.*"; }
+          # Matches all outputs
+          { "node.name" = "~bluez_output.*"; }
+        ];
+      }
+    ];
   };
+
+  # Hardware buttons for headsets: https://nixos.wiki/wiki/Bluetooth
+  # TODO: get to work
+  # services.mpris-proxy.enable = true;
 
   # Razer keyboard support
   hardware.openrazer.enable = true;
@@ -90,6 +132,7 @@
   environment.systemPackages = with pkgs; [
     wget
     git
+    pamixer # Volume controler for pipewire
     xorg.xf86inputlibinput # for razer trackpad
     razergenie # For razer keyboard
   ];
