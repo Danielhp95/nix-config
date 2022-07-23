@@ -33,6 +33,7 @@
       spotify
       feh # image viewer
       deluge # Torrent client
+      bottom # like htop but cooler
     ];
 
   };

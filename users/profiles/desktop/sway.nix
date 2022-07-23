@@ -55,6 +55,7 @@ in
 
     brightnessctl # Controlling screen brightness
     fcitx5 # Multi-language keyboard support
+    pamixer # Mixer for pipewire
   ];
 
   home.sessionVariables = {
@@ -103,7 +104,7 @@ in
       focus.newWindow = "urgent";
       floating = {
         criteria = [
-          { title = "Appointment"; class = "evolution"; }
+          { class = "Pavucontrol"; }
         ];
       };
       modes = {
