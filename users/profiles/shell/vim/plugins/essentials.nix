@@ -23,6 +23,7 @@ in
     # Dependencies
     deoplete-nvim # async operations (dependency)
     nvim-yarp # dependency for deoplete
+    auto-session # Session manager
   ];
 
   setup.Comment = callWith { };

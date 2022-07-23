@@ -46,6 +46,7 @@ wk.register({
       p = {"<cmd>Telescope project<CR>", "Projects"},
       o = {"<cmd>Telescope oldfiles<CR>", "Last opened files"},
       t = {"<cmd>Telescope<CR>", "Default telescope"},
+      r = {"<cmd>Telescope resume<CR>", "Resume last search"},
       s = {"<cmd>Telescope lsp_document_symbols<CR>", "Buffer lsp symbols"},
       S = {"<cmd>Telescope lsp_dynamic_workspace_symbols<CR>", "Workspace lsp symbols"},
     },
