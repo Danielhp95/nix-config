@@ -10,6 +10,8 @@
       # Track channels with commits tested and built by hydra
       nixos.url = "github:nixos/nixpkgs/nixos-22.05";
       latest.url = "github:nixos/nixpkgs/nixos-unstable";
+      mach-nix.url = "github:DavHau/mach-nix";
+      mach-nix.inputs.nixpkgs.follows = "nixos";
 
       digga.url = "github:divnix/digga";
       digga.inputs.latest.follows = "latest";
@@ -50,6 +52,7 @@
     , agenix
     , nvfetcher
     , deploy
+    , nix2vim
     , nixpkgs
     , ...
     } @ inputs:
@@ -62,7 +65,7 @@
         channels = {
           nixos = {
             imports = [ (digga.lib.importOverlays ./overlays) ];
-            overlays = [ self.inputs.nix2vim.overlay ];
+            overlays = [ nix2vim.overlay ];
           };
           latest = { };
         };
