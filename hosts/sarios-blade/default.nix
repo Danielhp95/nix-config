@@ -32,7 +32,25 @@
     "obsidian"
     "spotify"
     "spotify-unwrapped"
+    "steam"
+    "steam-original"
+    "steam-runtime"
   ];
+
+  # Should probably be moved to overrides
+  nixpkgs.config.packageOverrides = pkgs: {
+    steam = pkgs.steam.override {
+      extraPkgs = pkgs: with pkgs; [
+        libgdiplus
+      ];
+    };
+  };
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+  };
+
 
   hardware.opengl.enable = true;
 
@@ -46,7 +64,7 @@
   i18n = {
     defaultLocale = "en_GB.UTF-8";
     supportedLocales = [ "en_GB.UTF-8/UTF-8" "zh_CN.UTF-8/UTF-8" ];
-    inputMethod.enabled = "fcitx5"; # Not working!
+    inputMethod.enabled = "fcitx5";
     inputMethod.fcitx5.addons = with pkgs; [ fcitx5-chinese-addons fcitx5-rime fcitx5-configtool fcitx5-table-extra fcitx5-table-other ];
   };
   console = {
@@ -87,7 +105,6 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    # jack.enable = true;  # If JACK applications are needed
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
     media-session.config.bluez-monitor.rules = [
@@ -115,10 +132,6 @@
     ];
   };
 
-  # Hardware buttons for headsets: https://nixos.wiki/wiki/Bluetooth
-  # TODO: get to work
-  # services.mpris-proxy.enable = true;
-
   # Razer keyboard support
   hardware.openrazer.enable = true;
   hardware.openrazer.users = [ "sarios" ]; # Maybe this is repeated with "users/sarios/default.nix"
@@ -132,7 +145,6 @@
   environment.systemPackages = with pkgs; [
     wget
     git
-    pamixer # Volume controler for pipewire
     xorg.xf86inputlibinput # for razer trackpad
     razergenie # For razer keyboard
   ];

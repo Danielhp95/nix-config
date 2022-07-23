@@ -2,7 +2,7 @@
 {
   programs.mako = {
     enable = true;
-    anchor = "top-center";
+    anchor = "top-right";
     defaultTimeout = 10000;
     sort = "-time";
     maxVisible = 5;
