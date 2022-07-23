@@ -67,6 +67,7 @@ in
     GTK_IM_MODULE = "fcitx5";
     QT_IM_MODULE = "fcitx5";
     XDG_SCREENSHOTS_DIR = "$HOME/Pictures/screenshots"; # This makes grim run from the commandline work, but not when used here!
+    SSH_ASKPASS = ""; # To remove annoying GUI showing up everytime one git pushes
   };
 
   wayland.windowManager.sway = {
