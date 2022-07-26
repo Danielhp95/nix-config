@@ -12,13 +12,15 @@
     ./plugins/lspkind
     ./plugins/wilder
     ./plugins/fugitive.nix
+    ./plugins/trouble
+    ./plugins/dap
     ./plugins/nvim-tree.nix
     # ./plugins/telescope-hop
     ./plugins/telescope-project
     # ./plugins/fzf-vim.nix
     ./plugins/lsp.nix
     # ./plugins/toggleterm.nix
-    # ./plugins/neozoom.nix
+    # ./plugins/neozoom.nix  -- Soon!
     # ./plugins/fm.nix
     # ./plugins/gitlinker.nix
   ];

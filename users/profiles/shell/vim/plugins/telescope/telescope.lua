@@ -16,6 +16,7 @@ local function action_edit_ctrl_r(prompt_bufnr)
     return action_set.select(prompt_bufnr, "ctrl-r")
 end
 
+local action_layout = require('telescope.actions.layout')
 require('telescope').setup {
   defaults = {
       -- Appearance
@@ -46,6 +47,8 @@ require('telescope').setup {
               ["<C-r>"] = action_edit_ctrl_r,
               ["<C-n>"] = actions.cycle_history_next,
               ["<C-p>"] = actions.cycle_history_prev,
+              ['<a-j>'] = function(prompt_bufnr) action_layout.cycle_layout_next(prompt_bufnr) end,
+              ['<a-k>'] = function(prompt_bufnr) action_layout.cycle_layout_prev(prompt_bufnr) end,
           },
           n = {
               ["<esc>"] = actions.close,
@@ -57,8 +60,8 @@ require('telescope').setup {
           ignore_current_buffer = true,
           sort_mru = true,
           mappings = {
-            i = { ['<c-x>'] = 'delete_buffer' },
-            n = { ['<c-x>'] = 'delete_buffer' },
+            i = { ['<c-r>'] = 'delete_buffer' },
+            n = { ['<c-r>'] = 'delete_buffer' },
           },
       },
   },
@@ -74,7 +77,7 @@ require('telescope').setup {
 }
 --
 --require('telescope').load_extension('gh')
---require('telescope').load_extension('dap')
+require('telescope').load_extension('dap')
 require('telescope').load_extension('project')
 require('telescope').load_extension('fzf')
 

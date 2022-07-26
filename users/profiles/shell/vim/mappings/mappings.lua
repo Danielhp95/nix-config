@@ -8,7 +8,7 @@ wk.register({
   ["<C-Down>"] = {"<cmd>resize +1<cr>", "Continuous window vertical resize" },
   ["<C-Left>"] = {"<cmd>vertical resize +1<cr>", "Continuous window horizontal resize" },
   ["<C-Right>"] = {"<cmd>vertical resize -1<cr>", "Continuous window horizontal resize" },
-  ['<leader>tw'] = {"<cmd>set wrap!<cr>", "Toggle wrap" },
+  ['<leader>lw'] = {"<cmd>set wrap!<cr>", "Toggle wrap" },
   ["<C-s><C-s>" ] = {"<cmd>w<cr>", "Save buffer"},
 })
 
@@ -49,6 +49,8 @@ wk.register({
       r = {"<cmd>Telescope resume<CR>", "Resume last search"},
       s = {"<cmd>Telescope lsp_document_symbols<CR>", "Buffer lsp symbols"},
       S = {"<cmd>Telescope lsp_dynamic_workspace_symbols<CR>", "Workspace lsp symbols"},
+      d = {"<cmd>lua require'telescope.builtin'.find_files({cwd='~/config'})<cr>", "Open NIX config directory"},
+      w = {"<cmd>lua require'telescope.builtin'.find_files({cwd='~/knowledge'})<cr>", "Open Obsidian knowledge"},
     },
   }
 })
@@ -67,35 +69,18 @@ wk.register({
   }
 })
 
--- LSP
-wk.register({
-  K = {"<cmd>lua vim.lsp.buf.hover()<CR>", "Show documentation"},
-  ['<leader>'] = {
-    l = {
-      name = 'LSP functionality',
-      r = {"<cmd>lua vim.lsp.buf.rename()<CR>", "Rename"},
-      s = {"<cmd>lua vim.lsp.buf.signature_help()<CR>", "Show signature help"},
-      g = {
-        name = 'Goto ...',
-        D = {"<cmd>lua vim.lsp.buf.declaration()<CR>", "Goto declaration"},
-        d = {"<cmd>lua vim.lsp.buf.definition()<CR>", "Goto definition"},
-        i = {"<cmd>lua vim.lsp.buf.implementation()<CR>", "Goto implementation"},
-        r = {"<cmd>lua vim.lsp.buf.references()<CR>", "Show references"},
-      },
-    },
-  }
-})
-
 -- Diagnostics
 wk.register({
   ['<leader>'] = {
     d = {
       name = 'Diagnostics',
       n = {'<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', "Next diagnostic"},
-      p = {'<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', "Next diagnostic"},
+      p = {'<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', "Previous diagnostic"},
       s = {"<cmd>lua vim.diagnostic.open_float()<CR>", "Show diagnostic under cursor"},
-      -- TODO: add Trouble plugin!
+      a = {"<cmd>TroubleToggle document_diagnostics<CR>", "Show all diagnostics for this buffer"},
+      A = {"<cmd>TroubleToggle workspace_diagnostics<CR>", "Show all diagnostics for this project"},
     }
+    -- Recall that in Trouble pop-up thingy there's a keymap of "m" to change between document and workspace diagnostics
   }
 })
 
@@ -109,3 +94,71 @@ wk.register({
     }
   }
 })
+
+-- LSP
+local vertical_layout = "{layout_strategy='vertical', layout_config = {mirror = true}}"
+wk.register({
+  K = {"<cmd>lua vim.lsp.buf.hover()<CR>", "Show documentation"},
+  W = {"<cmd>lua vim.lsp.buf.signature_help()<CR>", "Show signature help"}, -- Not working
+  ['<leader>'] = {
+    l = {
+      name = 'LSP',
+      d = {string.format("<cmd>lua vim.lsp.buf.definition(%s)<CR>", vertical_layout), "Go to definition"},
+      D = {string.format("<cmd>lua vim.lsp.buf.declaration(%s)<CR>", vertical_layout), "Go to declaration"},
+      i = {string.format("<cmd>lua vim.lsp.buf.implementation(%s)<CR>", vertical_layout), "Go to implementation"},
+      r = {string.format("<cmd>lua require('telescope.builtin').lsp_references(%s)<cr>", vertical_layout), "Show references"},
+    },
+  }
+  -- TODO: get some extra stuff from handlers.lua
+  -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+})
+
+
+-- NvimTree
+wk.register({
+  ['<leader>'] = {
+    n = {
+      name = 'NvimTree',
+      n = {"<cmd>NvimTreeToggle<cr>", "Toggle Tree"},
+      e = {"<cmd>NvimTreeFindFileToggle<cr>", "Toggle tree on current file"},
+      f = {"<cmd>NvimTreeFocus<cr>", "Focus on tree"},
+    }
+  }
+})
+
+-- Debugger
+-- TODO: look at set_exception_breakpoint. Looks pretty sweet
+wk.register({
+  ['<leader>'] = {
+    b = {
+      name = 'Debugger',
+      t = {"<cmd>lua require('dapui').toggle()<cr>", "Toggle debugger UI"},
+      b = {"<cmd>DapToggleBreakpoint<cr>", "Toggle breakpoint at current line"},
+      B = {"<cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>", "Set breakpoint given condition"},
+      e = {"<cmd>lua require('dapui').eval()<cr>", "Evaluate expresion"},
+
+      c = {"<cmd>DapContinue<cr>", "Start / continue debugger"},
+      i = {"<cmd>lua require'dap'.terminate()<cr>", "Terminate debugger session"},
+
+      n = {"<cmd>lua require'dap'.step_over({askForTargets = true})<CR>", "Step over (next)"},
+      s = {"<cmd>lua require'dap'.step_into()<CR>", "Step into"},
+      o = {"<cmd>lua require'dap'.step_out()<CR>", "Step out"},
+      u = {"<cmd>lua require'dap'.up()<CR>", "Up stacktrace"},
+      d = {"<cmd>lua require'dap'.down()<CR>", "Down stacktrace"},
+      -- GOTO?
+
+      l = {
+        name = '+Show',
+        c = {"<cmd>Telescope dap commands<cr>", "Show available commands"},
+        o = {"<cmd>Telescope dap configurations<cr>", "DAP configurations"},
+        b = {"<cmd>Telescope dap list_breakpoints<cr>", "Show breakpoints"},
+        v = {"<cmd>Telescope dap variables<cr>", "Show variables"},
+        f = {"<cmd>Telescope dap frames<cr>", "Show frames"},
+      }
+    }
+  }
+})
+
+-- Debugger: visual
+wk.register({ ['<leader>b'] = { name = 'Debugger', e = {"<cmd>lua require('dapui').eval()<cr>", "Evaluate expresion"}, }}, {mode = 'v'})
+

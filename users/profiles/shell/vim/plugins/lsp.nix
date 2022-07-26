@@ -11,13 +11,18 @@ with dsl; {
     lsp_signature-nvim
     pkgs.texlab # latex
     pkgs.sumneko-lua-language-server # lua
-    pkgs.nodePackages.pyright # Python
+    # pkgs.nodePackages.pyright # Python
+    pkgs.python39Packages.python-lsp-server
   ];
 
-  # Python
-  use.lspconfig.pyright.setup = callWith {
-    cmd = [ "${pkgs.pyright}/bin/pyright" ];
+  use.lspconfig.pylsp.setup = callWith {
+    cmd = [ "${pkgs.python39Packages.python-lsp-server}/bin/pylsp" ];
   };
+
+  # Python
+  #use.lspconfig.pyright.setup = callWith {
+  #  cmd = [ "${pkgs.nodePackages.pyright}/bin/pyright-langserver" ];
+  #};
 
   # To have nice function signature show up in insert mode
   setup.lsp_signature = callWith { };
