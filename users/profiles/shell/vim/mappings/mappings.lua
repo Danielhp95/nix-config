@@ -10,6 +10,7 @@ wk.register({
   ["<C-Right>"] = {"<cmd>vertical resize -1<cr>", "Continuous window horizontal resize" },
   ['<leader>lw'] = {"<cmd>set wrap!<cr>", "Toggle wrap" },
   ["<C-s><C-s>" ] = {"<cmd>w<cr>", "Save buffer"},
+  ["<leader><leader>z"] = {"<cmd>NeoZoomToggle<cr>", "Zoom current buffer"},
 })
 
 -- Fugitive, git stuff

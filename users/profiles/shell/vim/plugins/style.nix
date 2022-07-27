@@ -3,16 +3,20 @@
 with dsl;
 {
   plugins = with pkgs.vimPlugins; [
+    lualine-nvim
+    tabline-nvim
+
+    # Colorschemes
     dracula-vim
     tokyonight-nvim
     nightfox-nvim
-    lualine-nvim
-    tabline-nvim
     onedarkpro-nvim
+    #zephyr-nvim
+
     nvim-web-devicons
   ];
 
-  setup.onedarkpro = callWith { theme = "onedark_vivid"; };
+  setup.onedarkpro = callWith { };
   vimscript = ''
     set termguicolors
     colorscheme dracula

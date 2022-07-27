@@ -40,6 +40,10 @@
         url = "github:gytis-ivaskevicius/nix2vim";
         inputs.nixpkgs.follows = "nixos";
       };
+      neozoom-nvim = {
+        url = "github:nyngwang/NeoZoom.lua";
+        flake = false;
+      };
     };
 
   outputs =
@@ -83,6 +87,16 @@
           nur.overlay
           agenix.overlay
           nvfetcher.overlay
+
+          (final: prev: {
+            __dontExport = true;
+            vimPlugins = prev.vimPlugins // {
+              neozoom-nvim = prev.vimUtils.buildVimPlugin {
+                name = "neozoom-nvim";
+                src = inputs.neozoom-nvim;
+              };
+            };
+          })
 
           (import ./pkgs)
         ];

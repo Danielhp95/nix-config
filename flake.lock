@@ -304,11 +304,11 @@
     },
     "latest": {
       "locked": {
-        "lastModified": 1657802959,
-        "narHash": "sha256-9+JWARSdlL8KiH3ymnKDXltE1vM+/WEJ78F5B1kjXys=",
+        "lastModified": 1658737577,
+        "narHash": "sha256-xosJ5nJT9HX+b6UWsSX6R+ap4AdZOCrl/r+IKFp2ASQ=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "4a01ca36d6bfc133bc617e661916a81327c9bbc8",
+        "rev": "5a0e0d73b944157328d54c4ded1cf2f0146a86a5",
         "type": "github"
       },
       "original": {
@@ -337,6 +337,22 @@
       "original": {
         "owner": "DavHau",
         "repo": "mach-nix",
+        "type": "github"
+      }
+    },
+    "neozoom-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1658654344,
+        "narHash": "sha256-A8RiK5dNRglJJfsaGxnyj3lOah1m8Zvmj1upeN4tYVI=",
+        "owner": "nyngwang",
+        "repo": "NeoZoom.lua",
+        "rev": "de0e27a3e619ed3f79232ba8daf0ae1a8e92bfea",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nyngwang",
+        "repo": "NeoZoom.lua",
         "type": "github"
       }
     },
@@ -378,11 +394,11 @@
     },
     "nixos": {
       "locked": {
-        "lastModified": 1657815135,
-        "narHash": "sha256-+5Jby1ayRjtSgsM5IpRNeUgdcIutCKQWR6sypRtd1RE=",
+        "lastModified": 1658777571,
+        "narHash": "sha256-gJMDUeaRhi47NxtrfFMIejlV5N3Ra2669w16Ndz2Jo0=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "c06d5fa9c605d143b15cafdbbb61c7c95388d76e",
+        "rev": "f0fa012b649a47e408291e96a15672a4fe925d65",
         "type": "github"
       },
       "original": {
@@ -413,11 +429,11 @@
     },
     "nixos-hardware": {
       "locked": {
-        "lastModified": 1657781616,
-        "narHash": "sha256-M/wl8+gRNELNhEmNjWTZVf61lfZIyiUn/NkyEqQAW80=",
+        "lastModified": 1658401027,
+        "narHash": "sha256-z/sDfzsFOoWNO9nZGfxDCNjHqXvSVZLDBDSgzr9qDXE=",
         "owner": "nixos",
         "repo": "nixos-hardware",
-        "rev": "76c9664813ed7082115ac7efb8a1619a804a631f",
+        "rev": "83009edccc2e24afe3d0165ed98b60ff7471a5f8",
         "type": "github"
       },
       "original": {
@@ -512,6 +528,7 @@
         "home": "home",
         "latest": "latest",
         "mach-nix": "mach-nix",
+        "neozoom-nvim": "neozoom-nvim",
         "nix2vim": "nix2vim",
         "nixos": "nixos",
         "nixos-generators": "nixos-generators",

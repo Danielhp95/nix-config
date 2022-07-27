@@ -20,7 +20,7 @@
     # ./plugins/fzf-vim.nix
     ./plugins/lsp.nix
     # ./plugins/toggleterm.nix
-    # ./plugins/neozoom.nix  -- Soon!
+    ./plugins/neozoom.nix
     # ./plugins/fm.nix
     # ./plugins/gitlinker.nix
   ];
