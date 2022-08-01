@@ -2,8 +2,8 @@
 local wilder = require('wilder')
 wilder.setup({
   modes = {':', '/', '?'},
+  previous_key = "<C-k>",
   next_key = "<C-j>",
-  prev_key = "<C-k>",
   accept_key = "<C-Space>",
   reject_key = "<C-e>",
 })
