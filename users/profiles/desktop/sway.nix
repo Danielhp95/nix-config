@@ -44,18 +44,18 @@ let
 in
 {
   home.packages = with pkgs; [
-    # display / lockscreen
-    swayidle # autolock
-    swaybg # Background
-    wdisplays # display management
-    wl-clipboard # clipboard mgmt
+    swayidle              # Autolock
+    swaybg                # To set wallpapers
+    wdisplays             # Display management
+    wl-clipboard          # Clipboard managment
 
-    # screenshots/recording
     sway-contrib.grimshot # screenshots
 
-    brightnessctl # Controlling screen brightness
-    fcitx5 # Multi-language keyboard support
-    pamixer # Mixer for pipewire
+    brightnessctl         # Controlling screen brightness
+    fcitx5                # Multi-language keyboard support
+    pamixer               # Controlling volume. Mixer for pipewire
+
+    libnotify             # Library to allow notifications
   ];
 
   home.sessionVariables = {
@@ -84,14 +84,14 @@ in
         style = "Bold Semi-Condensed";
         size = 13.0;
       };
-      #menu = ''"rofi -show-icons -modi ssh,drun,filebrowser,emoji -show drun"'';
-      menu = ''"rofi -show-icons -modi drun -show drun"'';
+      menu = ''rofi -show-icons -modi "drun,run" -show drun'';
       gaps = {
         inner = 9;
         outer = -2;
         smartGaps = true;
         smartBorders = "on";
       };
+      # TODO: assigns don't work
       assigns = {
         "2" = [
           { class = "Firefox$"; }
@@ -103,6 +103,7 @@ in
         ];
       };
       focus.newWindow = "urgent";
+      # TODO: floating doesn't work
       floating = {
         criteria = [
           { class = "Pavucontrol"; }
@@ -189,5 +190,4 @@ in
       bars = [ ];
     };
   };
-
 }

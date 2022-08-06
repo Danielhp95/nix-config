@@ -36,4 +36,14 @@
       map [normal] p toggle_presentation
     '';
   };
+
+  xdg.mimeApps = {
+    enable = true;
+    associations.added = {
+      "application/pdf" = ["org.pwmt.zathura"];
+    };
+    defaultApplications = {
+      "application/pdf" = ["org.pwmt.zathura"];
+    };
+  };
 }

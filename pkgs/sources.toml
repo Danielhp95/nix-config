@@ -2,3 +2,12 @@
 [manix]
 src.git = "https://github.com/mlvzk/manix"
 fetch.github = "mlvzk/manix"
+
+# (Neo)vim
+[neozoom-nvim]
+src.git = "https://github.com/nyngwang/NeoZoom.lua"
+fetch.github = "nyngwang/NeoZoom.lua"
+
+# [nvim-telescope-hop]
+# src.git = "https://github.com/nvim-telescope/telescope-hop.nvim"
+# fetch.github = "nvim-telescope/telescope-hop.nvim"

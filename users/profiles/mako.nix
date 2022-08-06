@@ -1,5 +1,6 @@
 { config, ... }:
 {
+
   programs.mako = {
     enable = true;
     anchor = "top-right";
@@ -14,6 +15,9 @@
     height = 300;
     width = 600;
 
+    icons = true;  # Show icons
+    # icon-location = "_left_";  Seems to not exist...
+
     # TODO: add self colors
     # colours
     #backgroundColor = background;
@@ -21,4 +25,8 @@
     #progressColor = "over ${secondary}";
     #textColor = foreground;
   };
+  # TODO: progress- color for mako notifications todo with brightness and volume
+
+  # TODO: Look into group-by for combining notifications into one?
+  # - i.e: Volume / brightness increase decrease
 }

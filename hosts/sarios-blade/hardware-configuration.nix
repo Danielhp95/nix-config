@@ -2,7 +2,12 @@
 # and may be overwritten by future invocations.  Please make changes
 # to /etc/nixos/configuration.nix instead.
 { config, lib, pkgs, modulesPath, ... }:
-
+let
+  #encUuid = "/dev/disk/by-uuid/55d357d0-af66-4abe-8d92-2db516659612";
+  encUuid = "/dev/disk/by-uuid/81b06382-c492-41de-b674-a8634255a45d";
+  #bootUuid = "/dev/disk/by-uuid/FC14-6F04";
+  bootUuid = "/dev/disk/by-uuid/E18C-7F23";
+in
 {
   imports =
     [ (modulesPath + "/installer/scan/not-detected.nix")
@@ -14,37 +19,38 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/55d357d0-af66-4abe-8d92-2db516659612";
+    { device = encUuid;
       fsType = "btrfs";
       options = [ "subvol=root" ];
     };
 
-  boot.initrd.luks.devices."enc-root".device = "/dev/disk/by-uuid/7d853e43-4342-4c93-944c-89599b7b8e1e";
+  #boot.initrd.luks.devices."enc-root".device = "/dev/disk/by-uuid/7d853e43-4342-4c93-944c-89599b7b8e1e";
+  boot.initrd.luks.devices."enc-root".device = "/dev/disk/by-uuid/c857bd32-44ad-4d88-bd65-8ccabfa00b62";
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/FC14-6F04";
+    { device = bootUuid;
       fsType = "vfat";
     };
 
   fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/55d357d0-af66-4abe-8d92-2db516659612";
+    { device = encUuid;
       fsType = "btrfs";
       options = [ "subvol=home" ];
     };
 
   fileSystems."/nix" =
-    { device = "/dev/disk/by-uuid/55d357d0-af66-4abe-8d92-2db516659612";
+    { device = encUuid;
       fsType = "btrfs";
       options = [ "subvol=nix" ];
     };
 
   fileSystems."/var/log" =
-    { device = "/dev/disk/by-uuid/55d357d0-af66-4abe-8d92-2db516659612";
+    { device = encUuid;
       fsType = "btrfs";
       options = [ "subvol=log" ];
     };
 
-  swapDevices = [ ];
+  swapDevices = [{ device = "/dev/disk/by-uuid/ddb7c39f-1ac9-4a52-b3e2-e33499a947c2"; }]; #swapDevices = [{ device = "/dev/disk/by-uuid/#__swap__#"; }];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's

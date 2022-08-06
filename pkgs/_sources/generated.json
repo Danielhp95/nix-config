@@ -1,0 +1,40 @@
+{
+    "manix": {
+        "cargoLocks": null,
+        "extract": null,
+        "name": "manix",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "mlvzk",
+            "repo": "manix",
+            "rev": "d08e7ca185445b929f097f8bfb1243a8ef3e10e4",
+            "sha256": "sha256-GqPuYscLhkR5E2HnSFV4R48hCWvtM3C++3zlJhiK/aw=",
+            "type": "github"
+        },
+        "version": "d08e7ca185445b929f097f8bfb1243a8ef3e10e4"
+    },
+    "neozoom-nvim": {
+        "cargoLocks": null,
+        "extract": null,
+        "name": "neozoom-nvim",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "nyngwang",
+            "repo": "NeoZoom.lua",
+            "rev": "de0e27a3e619ed3f79232ba8daf0ae1a8e92bfea",
+            "sha256": "sha256-A8RiK5dNRglJJfsaGxnyj3lOah1m8Zvmj1upeN4tYVI=",
+            "type": "github"
+        },
+        "version": "de0e27a3e619ed3f79232ba8daf0ae1a8e92bfea"
+    }
+}

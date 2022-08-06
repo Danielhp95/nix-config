@@ -19,7 +19,7 @@
     ./plugins/telescope-project
     # ./plugins/fzf-vim.nix
     ./plugins/lsp.nix
-    # ./plugins/toggleterm.nix
+    ./plugins/toggleterm.nix
     ./plugins/neozoom.nix
     # ./plugins/fm.nix
     # ./plugins/gitlinker.nix
