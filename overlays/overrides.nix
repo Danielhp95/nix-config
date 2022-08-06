@@ -18,4 +18,5 @@ channels: final: prev: {
 
   # To have all nice tree-sitter grammars
   nvim-treesitter-all = prev.vimPlugins.nvim-treesitter.withPlugins (_: final.tree-sitter.allGrammars);
+  steam = prev.steam.override { extraPkgs = prev: [ prev.libgdiplus ]; };
 }

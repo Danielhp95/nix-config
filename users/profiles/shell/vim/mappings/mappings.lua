@@ -23,7 +23,13 @@ wk.register({
       a = {"<cmd>Git add %:p<cr>", "Git add file" },
       c = {"<cmd>Git commit<cr>", "Git commit" },
       t = {"<cmd>Gitsigns toggle_signs<cr>", "Toggle gitsigns" },
+      r = {"<cmd>Gread<cr>", "Revert to latest git version" },
       -- Do something about blame lines?
+      l = {
+        name = "+log",
+        r = {"<cmd>0Gclog<cr>", "Load all revisions of this file for each commit that affects it" },
+        d = {"<cmd>Gclog<cr>", "Load all diffs of this file for each commit" },
+      },
       h = {
         name = "+hunks",
         s = {"<cmd>lua require('gitsigns').preview_hunk()<CR>", "Show hunk diff"},
@@ -163,3 +169,13 @@ wk.register({
 -- Debugger: visual
 wk.register({ ['<leader>b'] = { name = 'Debugger', e = {"<cmd>lua require('dapui').eval()<cr>", "Evaluate expresion"}, }}, {mode = 'v'})
 
+-- ToggleTerm
+wk.register({
+  ['<C-Space>'] = {
+    name = 'Terminal',
+    ['<C-Space>'] = {"<cmd>ToggleTerm<cr>", "Toggle Floating terminal"},
+    ['v'] = {"<cmd>ToggleTerm direction='vertical' size=50<cr>", "Toggle vertical terminal"},
+    ['h'] = {"<cmd>ToggleTerm direction='horizontal'<cr>", "Toggle horizontal terminal"},
+    ['t'] = {"<cmd>ToggleTermAll<cr>", "Toggle all terminals"},
+  }
+})

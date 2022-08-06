@@ -29,6 +29,7 @@
   };
 
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "discord"
     "obsidian"
     "spotify"
     "spotify-unwrapped"
@@ -38,19 +39,18 @@
   ];
 
   # Should probably be moved to overrides
-  nixpkgs.config.packageOverrides = pkgs: {
-    steam = pkgs.steam.override {
-      extraPkgs = pkgs: with pkgs; [
-        libgdiplus
-      ];
-    };
-  };
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-  };
-
+  #nixpkgs.config.packageOverrides = pkgs: {
+  #  steam = pkgs.steam.override {
+  #    extraPkgs = pkgs: with pkgs; [
+  #      libgdiplus
+  #    ];
+  #  };
+  #};
+  #programs.steam = {
+  #  enable = true;
+  #  remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+  #  dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+  #};
 
   hardware.opengl.enable = true;
 
@@ -151,6 +151,13 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+
+  # Controls garbage collection
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 30d";
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
