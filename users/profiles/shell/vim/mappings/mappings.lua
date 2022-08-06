@@ -176,6 +176,6 @@ wk.register({
     ['<C-Space>'] = {"<cmd>ToggleTerm<cr>", "Toggle Floating terminal"},
     ['v'] = {"<cmd>ToggleTerm direction='vertical' size=50<cr>", "Toggle vertical terminal"},
     ['h'] = {"<cmd>ToggleTerm direction='horizontal'<cr>", "Toggle horizontal terminal"},
-    ['t'] = {"<cmd>ToggleTermAll<cr>", "Toggle all terminals"},
+    ['t'] = {"<cmd>ToggleTermToggleAll<cr>", "Toggle all terminals"},
   }
 })
