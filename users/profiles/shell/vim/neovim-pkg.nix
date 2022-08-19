@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   imports = [
     ./options.nix
@@ -21,6 +21,8 @@
     ./plugins/lsp.nix
     ./plugins/toggleterm.nix
     ./plugins/neozoom.nix
+    #./plugins/magma.nix
+    ./plugins/tmpclone.nix
     # ./plugins/fm.nix
     # ./plugins/gitlinker.nix
   ];

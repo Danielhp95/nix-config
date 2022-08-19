@@ -254,11 +254,11 @@
     },
     "flake-utils_4": {
       "locked": {
-        "lastModified": 1656928814,
-        "narHash": "sha256-RIFfgBuKz6Hp89yRr7+NR5tzIAbn52h8vT6vXkYjZoM=",
+        "lastModified": 1659877975,
+        "narHash": "sha256-zllb8aq3YO3h8B/U0/J1WBgAL8EX5yWf5pMj3G0NAmc=",
         "owner": "numtide",
         "repo": "flake-utils",
-        "rev": "7e2a3b3dfd9af950a856d66b0a7d01e3c18aa249",
+        "rev": "c0e246b9b83f637f4681389ecabcb2681b4f3af0",
         "type": "github"
       },
       "original": {
@@ -349,11 +349,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1659444419,
-        "narHash": "sha256-Km3CoHekDKHKtUpduQpmfjhBoU38H34v/pKZ836BMzM=",
+        "lastModified": 1660420875,
+        "narHash": "sha256-pDX/c1Rq/fr4oVNmwLs2cl0JGnxqX8X2tpuHcYc9aHs=",
         "owner": "gytis-ivaskevicius",
         "repo": "nix2vim",
-        "rev": "01aadcea5217bb3e75cccd9f289809ca95d9cd01",
+        "rev": "b52f028f5d0d7aea646fbdd5389d887b81c025e6",
         "type": "github"
       },
       "original": {
@@ -523,7 +523,21 @@
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_2",
         "nur": "nur",
-        "nvfetcher": "nvfetcher"
+        "nvfetcher": "nvfetcher",
+        "tmpclone-nvim": "tmpclone-nvim"
+      }
+    },
+    "tmpclone-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1660727375,
+        "narHash": "sha256-uI72rWL4YftICXvUEwhBqAHahtjrbgJYzVvprYsyLHQ=",
+        "path": "/home/sarios/Projects/tmpclone-nvim",
+        "type": "path"
+      },
+      "original": {
+        "path": "/home/sarios/Projects/tmpclone-nvim",
+        "type": "path"
       }
     },
     "utils": {

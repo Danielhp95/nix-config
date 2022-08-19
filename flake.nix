@@ -40,6 +40,11 @@
         url = "github:gytis-ivaskevicius/nix2vim";
         inputs.nixpkgs.follows = "nixos";
       };
+
+      tmpclone-nvim = {
+        url = "path:/home/sarios/Projects/tmpclone-nvim";
+        flake = false;
+      };
     };
 
   outputs =
@@ -83,6 +88,17 @@
           nur.overlay
           agenix.overlay
           nvfetcher.overlay
+
+          (final: prev: {
+            __dontExport = true;
+            vimPlugins = prev.vimPlugins // {
+              tmpclone-nvim = prev.vimUtils.buildVimPlugin {
+                name = "tmpclone-nvim";
+                src = inputs.tmpclone-nvim;
+              };
+            };
+          })
+
 
           (import ./pkgs)
         ];

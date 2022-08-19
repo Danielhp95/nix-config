@@ -10,6 +10,9 @@ with dsl;
 
     # Python
     pkgs.python310Packages.debugpy # TODO: Should this be installed in Python projects instead of system-wide like here?
+
+    # Lua
+    #one-small-step-for-vimkind
   ];
 
   setup.dapui = callWith { };

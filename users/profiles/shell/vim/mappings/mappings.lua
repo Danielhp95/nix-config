@@ -10,7 +10,6 @@ wk.register({
   ["<C-Right>"] = {"<cmd>vertical resize -1<cr>", "Continuous window horizontal resize" },
   ['<leader>lw'] = {"<cmd>set wrap!<cr>", "Toggle wrap" },
   ["<C-s><C-s>" ] = {"<cmd>w<cr>", "Save buffer"},
-  ["<leader><leader>z"] = {"<cmd>NeoZoomToggle<cr>", "Zoom current buffer"},
 })
 
 -- Fugitive, git stuff
@@ -171,9 +170,10 @@ wk.register({ ['<leader>b'] = { name = 'Debugger', e = {"<cmd>lua require('dapui
 
 -- ToggleTerm
 wk.register({
-  ['<C-Space>'] = {
+  ['<leader><leader>'] = {
     name = 'Terminal',
-    ['<C-Space>'] = {"<cmd>ToggleTerm<cr>", "Toggle Floating terminal"},
+    ['z'] = {"<cmd>NeoZoomToggle<cr>", "Zoom current buffer"},
+    ['f'] = {"<cmd>ToggleTerm<cr>", "Toggle Floating terminal"},
     ['v'] = {"<cmd>ToggleTerm direction='vertical' size=50<cr>", "Toggle vertical terminal"},
     ['h'] = {"<cmd>ToggleTerm direction='horizontal'<cr>", "Toggle horizontal terminal"},
     ['t'] = {"<cmd>ToggleTermToggleAll<cr>", "Toggle all terminals"},

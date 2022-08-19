@@ -28,6 +28,13 @@ in
 
   setup.Comment = callWith { };
   lua = lib.mkBefore ''
+    -- For developing purposes
+    -- Prints table in nice format
+    P = function(v)
+      print(vim.inspect(v))
+      return v
+    end
+
     function strEmpty(s)
       return s == nil or s == ""
     end

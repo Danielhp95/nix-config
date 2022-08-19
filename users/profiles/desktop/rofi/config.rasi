@@ -2,7 +2,7 @@ configuration {
   width: 100;
   lines: 10;
   columns: 1;
-  font: "Fira Code 20";
+  font: "Fira Code 30";
   bw: 7;
   location: 0;
   padding: 5;

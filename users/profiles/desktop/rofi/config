@@ -3,7 +3,7 @@ rofi.theme: slate
 rofi.width:               100
 rofi.lines:               10
 rofi.columns:             1
-rofi.font:                Fira Code 20
+rofi.font:                Fira Code 30
 rofi.show-icons:          true
 rofi.color-normal:        #1d1f21, #00FF15, #1d1f21, #a35151, #ffffff
 rofi.color-urgent:        #1d1f21, #d6b48d, #22231D, #d6b48d, #ffffff

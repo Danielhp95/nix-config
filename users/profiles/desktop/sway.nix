@@ -44,18 +44,18 @@ let
 in
 {
   home.packages = with pkgs; [
-    swayidle              # Autolock
-    swaybg                # To set wallpapers
-    wdisplays             # Display management
-    wl-clipboard          # Clipboard managment
+    swayidle # Autolock
+    swaybg # To set wallpapers
+    wdisplays # Display management
+    wl-clipboard # Clipboard managment
 
     sway-contrib.grimshot # screenshots
 
-    brightnessctl         # Controlling screen brightness
-    fcitx5                # Multi-language keyboard support
-    pamixer               # Controlling volume. Mixer for pipewire
+    brightnessctl # Controlling screen brightness
+    fcitx5 # Multi-language keyboard support
+    pamixer # Controlling volume. Mixer for pipewire
 
-    libnotify             # Library to allow notifications
+    libnotify # Library to allow notifications
   ];
 
   home.sessionVariables = {
@@ -86,7 +86,7 @@ in
       };
       menu = ''rofi -show-icons -modi "drun,run" -show drun'';
       gaps = {
-        inner = 9;
+        inner = 4;
         outer = -2;
         smartGaps = true;
         smartBorders = "on";
