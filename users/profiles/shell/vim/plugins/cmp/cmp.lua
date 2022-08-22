@@ -1,7 +1,7 @@
 require('luasnip/loaders/from_vscode').lazy_load()
 local luasnip = require('luasnip')
-
 local cmp = require'cmp'
+
 cmp.setup({
     snippet = { -- REQUIRED - you must specify a snippet engine
       expand = function(args)
@@ -66,4 +66,19 @@ cmp.setup({
             return vim_item
         end,
     },
+    -- nvim-cmp by defaults disables autocomplete for prompt buffers
+    enabled = function ()
+      return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt"
+        or require("cmp_dap").is_dap_buffer()
+    end,
+})
+
+cmp.setup.filetype({ "dap-repl", "dapui_watches" }, {
+  sources = {
+    { name = "dap" },
+  },
+  mapping = {
+      ['<C-j>'] = cmp.mapping.select_next_item(),
+      ['<C-k>'] = cmp.mapping.select_prev_item(),
+  }
 })

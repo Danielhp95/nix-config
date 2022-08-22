@@ -1,4 +1,23 @@
 {
+    "cmp-dap": {
+        "cargoLocks": null,
+        "extract": null,
+        "name": "cmp-dap",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "rcarriga",
+            "repo": "cmp-dap",
+            "rev": "e21f0e5d188ee428f8acab1af21839af391607a4",
+            "sha256": "sha256-oFHXTiPkYDvD7CLXKgp88tQnMEX2e/N5Z43VGI45m6Y=",
+            "type": "github"
+        },
+        "version": "e21f0e5d188ee428f8acab1af21839af391607a4"
+    },
     "cmp-path": {
         "cargoLocks": null,
         "extract": null,
@@ -17,25 +36,6 @@
             "type": "github"
         },
         "version": "447c87cdd6e6d6a1d2488b1d43108bfa217f56e1"
-    },
-    "magma-nvim": {
-        "cargoLocks": null,
-        "extract": null,
-        "name": "magma-nvim",
-        "passthru": null,
-        "pinned": false,
-        "src": {
-            "deepClone": false,
-            "fetchSubmodules": false,
-            "leaveDotGit": false,
-            "name": null,
-            "owner": "dccsillag",
-            "repo": "magma-nvim",
-            "rev": "8b1d928f88dab299f8da2930624185814ae2a9af",
-            "sha256": "sha256-rm+OqNPVpMh0rTM4BW8HrvLKpJN7864BnKTdpkgikpg=",
-            "type": "github"
-        },
-        "version": "8b1d928f88dab299f8da2930624185814ae2a9af"
     },
     "manix": {
         "cargoLocks": null,
@@ -74,24 +74,6 @@
             "type": "github"
         },
         "version": "de0e27a3e619ed3f79232ba8daf0ae1a8e92bfea"
-    },
-    "one-small-step-for-vimkind": {
-        "cargoLocks": null,
-        "extract": null,
-        "name": "one-small-step-for-vimkind",
-        "passthru": null,
-        "pinned": false,
-        "src": {
-            "deepClone": false,
-            "fetchSubmodules": false,
-            "leaveDotGit": false,
-            "name": null,
-            "owner": "jbyuki",
-            "repo": "one-small-step-for-vimkind",
-            "rev": "59ec6f57545a42e68995994bfa57479da5e68b74",
-            "sha256": "sha256-bpYfScckecKSFj6ne0qiowza4fbkYxo7wsvHMypG1g4=",
-            "type": "github"
-        },
-        "version": "59ec6f57545a42e68995994bfa57479da5e68b74"
     }
 }
+

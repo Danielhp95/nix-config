@@ -10,6 +10,7 @@ with dsl; {
     cmp-buffer
     cmp-path
     cmp_luasnip
+    cmp-dap
   ];
 
   # TODO: not working?

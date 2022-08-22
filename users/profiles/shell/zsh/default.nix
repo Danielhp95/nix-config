@@ -28,7 +28,7 @@ in
       autoload -U select-word-style
       select-word-style bash
 
-      bindkey '^r' fzf-history-widget  # [Ctrl-r] - Search backward incrementally for a specified string. The string may begin with ^ to anchor the search to the beginning of the line.
+      # bindkey '^r' fzf-history-widget  # [Ctrl-r] - Search backward incrementally for a specified string. The string may begin with ^ to anchor the search to the beginning of the line.
       bindkey ' ' magic-space          # [Space] - don't do history expansion
 
 

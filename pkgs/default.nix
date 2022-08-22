@@ -9,6 +9,7 @@ final: prev: rec {
   vimPlugins = prev.vimPlugins // (import ./vim/default.nix prev sources [
     "neozoom-nvim"
     "cmp-path"
+    "cmp-dap"
     #     "tmpclone-nvim"
   ]);
 }
