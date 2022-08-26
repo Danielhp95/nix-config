@@ -10,19 +10,24 @@ with dsl;
     dracula-vim
     tokyonight-nvim
     nightfox-nvim
-    onedarkpro-nvim
+    onedark-nvim
     #zephyr-nvim
 
     nvim-web-devicons
   ];
 
-  setup.onedarkpro = callWith { };
-  vimscript = ''
-    set termguicolors
-    colorscheme dracula
-  '';
+  # TODO: if you find the motivation.
+  #Copy style from: https://github.com/olimorris/onedarkpro.nvim
+  # Which should be in the author's dotfiles: https://github.com/olimorris/dotfiles/
 
-  # setup.tabline.show_index = false;
+  use.onedark.setup = callWith {
+    style = "deep";
+    toggle_style_key = "<leader><leader><leader>";
+  };
+
+  vimscript = "colorscheme onedark";
+
+  # use.onedark.load = callWith { };
 
   setup.lualine = {
     options = {

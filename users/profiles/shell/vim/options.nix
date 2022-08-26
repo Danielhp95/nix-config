@@ -18,6 +18,7 @@ with dsl;
     showmatch = true;
     ignorecase = true;
     smartcase = true;
+    termguicolors = true;
     inccommand = "split";
     incsearch = true;
     tabstop = 2;
