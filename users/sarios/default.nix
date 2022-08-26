@@ -26,6 +26,7 @@
     home.packages = with pkgs; [
       discord # Chat server
       firefox # Web browser
+      chromium # Web browser, in case that firefox does not work
       tmux # Terminal mutiplexer
       tdesktop # Telegram desktop
       exa # Better ls
@@ -35,7 +36,8 @@
       mpv # Media player
       spotify # Music music music
       feh # image viewer
-      deluge # Torrent client
+      transmission-qt # Torrent client
+      #deluge # Torrent client
       bottom # like htop but cooler
       libnotify # To have notify-send command
     ];
