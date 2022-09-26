@@ -41,8 +41,10 @@
         inputs.nixpkgs.follows = "nixos";
       };
 
-      tmpclone-nvim = {
-        url = "path:/home/sarios/Projects/tmpclone-nvim";
+
+      # TODO: remove this when finished
+      imagine-nvim = {
+        url = "path:/home/sarios/Projects/imagine.nvim";
         flake = false;
       };
     };
@@ -65,6 +67,7 @@
       {
         inherit self inputs;
 
+        # TODO: change to false!
         channelsConfig = { allowUnfree = nixos.lib.mkForce true; };
 
         channels = {
@@ -92,9 +95,10 @@
           (final: prev: {
             __dontExport = true;
             vimPlugins = prev.vimPlugins // {
-              tmpclone-nvim = prev.vimUtils.buildVimPlugin {
-                name = "tmpclone-nvim";
-                src = inputs.tmpclone-nvim;
+              # TODO: remove this!
+              imagine-nvim = prev.vimUtils.buildVimPlugin {
+                name = "imagine-nvim";
+                src = inputs.imagine-nvim;
               };
             };
           })

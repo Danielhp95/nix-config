@@ -12,11 +12,11 @@
             "name": null,
             "owner": "rcarriga",
             "repo": "cmp-dap",
-            "rev": "e21f0e5d188ee428f8acab1af21839af391607a4",
-            "sha256": "sha256-oFHXTiPkYDvD7CLXKgp88tQnMEX2e/N5Z43VGI45m6Y=",
+            "rev": "3310f7daec849ba708c1dd34e3d3bc721ca35511",
+            "sha256": "sha256-o34dBm5yV1W3obIbgxLWOsyAzdAjyfH1h54Tyjx9HjY=",
             "type": "github"
         },
-        "version": "e21f0e5d188ee428f8acab1af21839af391607a4"
+        "version": "3310f7daec849ba708c1dd34e3d3bc721ca35511"
     },
     "cmp-path": {
         "cargoLocks": null,
@@ -76,4 +76,3 @@
         "version": "de0e27a3e619ed3f79232ba8daf0ae1a8e92bfea"
     }
 }
-

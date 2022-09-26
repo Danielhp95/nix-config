@@ -303,6 +303,19 @@
         "type": "github"
       }
     },
+    "imagine-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1662914758,
+        "narHash": "sha256-1XxIVeLMTEZYaGeq8vvvGUb45pMxIjspbOH8Q33Dyxc=",
+        "path": "/home/sarios/Projects/imagine.nvim",
+        "type": "path"
+      },
+      "original": {
+        "path": "/home/sarios/Projects/imagine.nvim",
+        "type": "path"
+      }
+    },
     "latest": {
       "locked": {
         "lastModified": 1659522808,
@@ -515,6 +528,7 @@
         "deploy": "deploy",
         "digga": "digga",
         "home": "home",
+        "imagine-nvim": "imagine-nvim",
         "latest": "latest",
         "mach-nix": "mach-nix",
         "nix2vim": "nix2vim",
@@ -523,21 +537,7 @@
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_2",
         "nur": "nur",
-        "nvfetcher": "nvfetcher",
-        "tmpclone-nvim": "tmpclone-nvim"
-      }
-    },
-    "tmpclone-nvim": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1660727375,
-        "narHash": "sha256-uI72rWL4YftICXvUEwhBqAHahtjrbgJYzVvprYsyLHQ=",
-        "path": "/home/sarios/Projects/tmpclone-nvim",
-        "type": "path"
-      },
-      "original": {
-        "path": "/home/sarios/Projects/tmpclone-nvim",
-        "type": "path"
+        "nvfetcher": "nvfetcher"
       }
     },
     "utils": {

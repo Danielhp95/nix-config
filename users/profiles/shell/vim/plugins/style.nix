@@ -14,6 +14,7 @@ with dsl;
     #zephyr-nvim
 
     nvim-web-devicons
+    markdown-preview-nvim
   ];
 
   # TODO: if you find the motivation.
@@ -22,7 +23,7 @@ with dsl;
 
   use.onedark.setup = callWith {
     style = "deep";
-    toggle_style_key = "<leader><leader><leader>";
+    toggle_style_key = "<C-c>";
   };
 
   vimscript = "colorscheme onedark";

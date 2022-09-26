@@ -15,16 +15,14 @@
     ./plugins/trouble
     ./plugins/dap
     ./plugins/nvim-tree.nix
-    # ./plugins/telescope-hop
     ./plugins/telescope-project
-    # ./plugins/fzf-vim.nix
     ./plugins/lsp.nix
     ./plugins/toggleterm.nix
     ./plugins/neozoom.nix
-    #./plugins/magma.nix
+
+    ./plugins/playground.nix
     ./plugins/tmpclone.nix
-    # ./plugins/fm.nix
-    # ./plugins/gitlinker.nix
+    ./plugins/imagine.nix
   ];
   withPython3 = true;
   withNodeJs = true;

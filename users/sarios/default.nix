@@ -24,6 +24,7 @@
       mako
     ];
     home.packages = with pkgs; [
+      zoom-us  # To talk with XuanXuan
       discord # Chat server
       firefox # Web browser
       chromium # Web browser, in case that firefox does not work
@@ -35,11 +36,13 @@
       element-desktop # Matrix server client
       mpv # Media player
       spotify # Music music music
-      feh # image viewer
+      imv # image viewer
       transmission-qt # Torrent client
-      #deluge # Torrent client
+      ranger # File manager
       bottom # like htop but cooler
       libnotify # To have notify-send command
+      lm_sensors # To have `sensors` command for cpu temperatures
+      acpi       # To measure battery state
     ];
 
   };

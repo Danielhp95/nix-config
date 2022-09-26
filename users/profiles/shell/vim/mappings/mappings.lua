@@ -10,6 +10,7 @@ wk.register({
   ["<C-Right>"] = {"<cmd>vertical resize -1<cr>", "Continuous window horizontal resize" },
   ['<leader>lw'] = {"<cmd>set wrap!<cr>", "Toggle wrap" },
   ["<C-s><C-s>" ] = {"<cmd>w<cr>", "Save buffer"},
+  ["gf"] = {"<cmd>e <cfile><cr>", "Open file under cursor even if not existing"},
 })
 
 -- Fugitive, git stuff
@@ -173,9 +174,15 @@ wk.register({
   ['<leader><leader>'] = {
     name = 'Terminal',
     ['z'] = {"<cmd>NeoZoomToggle<cr>", "Zoom current buffer"},
-    ['f'] = {"<cmd>ToggleTerm<cr>", "Toggle Floating terminal"},
+    ['f'] = {"<cmd>ToggleTerm direction='float'<cr>", "Toggle Floating terminal"},
     ['v'] = {"<cmd>ToggleTerm direction='vertical' size=50<cr>", "Toggle vertical terminal"},
     ['h'] = {"<cmd>ToggleTerm direction='horizontal'<cr>", "Toggle horizontal terminal"},
     ['t'] = {"<cmd>ToggleTermToggleAll<cr>", "Toggle all terminals"},
   }
+})
+
+
+-- Development
+wk.register({
+  ['<C-s><C-r>'] = {"<cmd>source %<cr>", "Sources currenty file"}
 })

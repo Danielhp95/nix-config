@@ -33,6 +33,7 @@
     "obsidian"
     "spotify"
     "spotify-unwrapped"
+    "nvidia"
     "steam"
     "steam-original"
     "steam-runtime"
@@ -52,8 +53,13 @@
   #  dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
   #};
 
+  ## Graphics
   hardware.opengl.enable = true;
 
+  services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
+
+  # Networking
   networking.hostName = "sarios-blade"; # Define your hostname.
   networking.wireless.iwd.enable = true; # Enables iwctl REPL for connecting to the internet
 

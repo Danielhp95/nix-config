@@ -70,7 +70,6 @@ in
       la = "exa -alFg";
 
       # rust alternatives
-      cat = "bat";
       du = "dust";
 
       # tmux

@@ -13,6 +13,7 @@ with dsl;
   vim.o = {
     grepprg = "rg --vimgrep --no-heading --smart-case";
     grepformat = "%f:%l:%c:%m,%f:%l:%m";
+    relativenumber = true;
     autoread = true;
     showcmd = true;
     showmatch = true;
